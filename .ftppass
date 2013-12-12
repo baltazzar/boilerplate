@@ -1,0 +1,6 @@
+{
+  "admin": {
+    "username": "ftp-server-username",
+    "password": "ftp-server-password"
+  }
+}

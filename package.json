@@ -1,6 +1,7 @@
 {
-	"name": "NOME_DA_APP",
+	"name": "SIGLA DA APP",
 	"version": "0.0.1",
+	"private": true,
 	"volo": {
 		"baseDir": "app/js/libs",
 		"dependencies": {

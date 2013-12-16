@@ -1,7 +1,35 @@
 Boilerplate
 ===========
 
-Ponto de partida front-end para aplicações web.
+> Ponto de partida front-end para aplicações web.
+
+
+**Importante!** Para o uso do Boilerplate é necessário ter o [Node.js](http://www.nodejs.org) instalado.
+
+
+### Pré-Instalação
+
+Caso ainda não tenha o [Volo](http://www.volojs.org) instalado, no cmd/powershell execute o comando:
+
+```
+npm install -g volo
+```
+
+Esse comando instalará o [Volo](http://www.volojs.org), que será o responsável pelo gerenciamento das dependências da sua aplicação
+
+
+### Instalação
+
+Estando dentro da pasta da aplicação, no cmd/powershell execute o comando:
+
+```
+volo install -f baltazzar/boilerplate .
+```
+
+**Não esquecer do ponto no final**
+
+Esse comando instalará o Boilerplate juntamente com as bibliotecas necessárias para o seu uso.
+
 
 ### Bibliotecas Inclusas
 
@@ -13,15 +41,12 @@ Ponto de partida front-end para aplicações web.
 - Bootstrap
 - Require
 
+
 ### Configuração dos Arquivos
 
 #### index.html
 
 Onde estiver escrito "NOME DA APP" altere para o nome real da sua aplicação.
-
-#### config.js
-
-Alterar a variável "BASE_URL" para a url do backend a ser utilizado.
 
 #### app/templates/menu.tpl
 
@@ -42,9 +67,6 @@ Onde estiver escrito "FTP SERVER USERNAME" e "FTP SERVER PASSWORD" altere para o
 
 ### Instalação das Dependências
 
-**Importante! Para baixar as dependências do Boilerplate é necessário ter o [Node.js](http://www.nodejs.org) instalado.**
-
-
 #### Dependências do Boilerplate
 
 Estando dentro da pasta da aplicação, no cmd/powershell execute o comando:
@@ -53,19 +75,10 @@ Estando dentro da pasta da aplicação, no cmd/powershell execute o comando:
 npm install
 ```
 
-Esse comando baixará todas as dependências necessárias para o uso apropriado do Boilerplate.
+Esse comando instalará o [Grunt](http://gruntjs.com/) e seus plugins. O Grunt será responsável por auxiliá-lo no processo de desenvolvimento da aplicação.
 
-#### Dependências da App
 
-No arquivo package.json, em `volo.dependencies`, adicione as demais bibliotecas necessárias ao seu projeto. Para saber mais sobre como adicionar bibliotecas neste arquivo favor consultar a documentação no [Repositorio do Volo no Github](https://github.com/volojs/volo/blob/master/commands/add/doc.md). Estando dentro da pasta da aplicação, no cmd/powershell execute o comando:
-
-```
-volo install -f
-```
-
-Esse comando baixará todas as dependências expecificadas no arquivo `package.json` e as colocará na pasta `app/js/libs`.
-
-#### Compilação dos Templates
+### Compilação dos Templates
 
 Estando dentro da pasta da aplicação, no cmd/powershell execute o comando:
 
@@ -74,3 +87,18 @@ grunt compile
 ```
 
 Esse comando compilará os templates iniciais necessários para o uso do Boilerplate.
+
+
+### Informações Adicionais
+
+Para adicionar bibliotecas à sua aplicação, altere o objeto `volo.dependencies` no arquivo `package.json`. Para saber mais sobre como adicionar bibliotecas neste arquivo favor consultar a documentação no [Repositorio do Volo no Github](https://github.com/volojs/volo/blob/master/commands/add/doc.md).
+
+Após adicionar as bibliotecas, estando dentro da pasta da aplicação, no cmd/powershell execute o comando:
+
+```
+volo install -f
+```
+
+Esse comando baixará todas as dependências expecificadas no arquivo `package.json` e as colocará na pasta `app/js/libs`.
+
+Repita essa rotina sempre que precisar adicionar/remover bibliotecas da aplicação.

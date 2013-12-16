@@ -33,7 +33,7 @@ Onde tiver escrito "SIGLA DA APP" e "NOME DA APP" altere para a sigla real e o n
 
 #### package.json
 
-Onde tiver escrito "SIGLA DA APP" altere para a sigla real da sua aplicação.
+Onde tiver escrito "SIGLA_DA_APP" altere para a sigla real da sua aplicação.
 
 #### .ftppass
 

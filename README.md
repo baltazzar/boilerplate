@@ -20,13 +20,11 @@ Esse comando instalará o [Volo](http://www.volojs.org), que será o responsáve
 
 ### Instalação
 
-Estando dentro da pasta da aplicação, no cmd/powershell execute o comando:
+No cmd/powershell execute o comando abaixo, substituindo `nomeDaApp` pelo nome da sua aplicação:
 
 ```
-volo install -f baltazzar/boilerplate .
+volo create nomeDaApp baltazzar/boilerplate
 ```
-
-**Não esquecer do ponto no final**
 
 Esse comando instalará o Boilerplate juntamente com as bibliotecas necessárias para o seu uso.
 

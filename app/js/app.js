@@ -23,21 +23,21 @@ define(function(require, exports, module){
 	exports.showView = function(region, view) {
 		App.menu.show( new MenuView() );
 		App[region].show(view);
-	}
+	};
 
 	exports.index = function() {
 		this.showView('main', new AppHomeView());
-	}
+	};
 
 	exports.pagina404 = function() {
 		this.showView('main', new Pagina404View());
-	}
+	};
 
 	exports.closeModal = function() {
 		if(App.getRegion('modal')) {
 			App.getRegion('modal').close();
 		}
-	}
+	};
 
 	exports.marionetteApp = App;
 });

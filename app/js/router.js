@@ -7,8 +7,8 @@ define(function(require, exports, module){
 
 		routes: {
 			'*404': function() {
-				Utils.loadModule(Config.app, function(mod) {
-					mod['pagina404']();
+				Utils.loadModule('app', function(App) {
+					App['pagina404']();
 				});
 			}
 		},
@@ -17,19 +17,12 @@ define(function(require, exports, module){
 			var router = this,
 				modulos = _.extend({}, {'app': Config.app});
 
-			// Injeta o objeto App em todos os módulos
-			var bindAppMethods = function(modulo, callback) {
-				Utils.loadModule(Config.app, function(App) {
-					modulo.app = App;
-					callback();
-				});
+			if(Config.modules) {
+				modulos = _.extend(modulos, Config.modules);
 			}
 
-			if(Config.modulos) {
-				modulos = _.extend(modulos, Config.modulos);
-			}
+			_.each(modulos, function(modulo, name) {
 
-			_.each(modulos, function(modulo) {
 				_.each(modulo.routes, function(metodo, rota) {
 					if(rota == '*404') {
 						return;
@@ -38,8 +31,12 @@ define(function(require, exports, module){
 						var args = arguments,
 							parameters = {};
 
-						Utils.loadModule(modulo, function(mod) {
-							bindAppMethods(mod, function() {
+						Utils.loadModule(name, function(mod) {
+							Utils.loadModule('app', function(App) {
+								// Injeta o objeto App em todos os módulos
+								if(name !== 'app') {
+									mod.app = App;
+								}
 								if(params) {
 									var re = rota.match(/\:([a-z0-9]*)/g);
 
@@ -64,7 +61,7 @@ define(function(require, exports, module){
 	var registerRoutes = function() {
 		new AppRouter();
 		Backbone.history.start();
-	}
+	};
 
 	exports.registerRoutes = registerRoutes;
 });

@@ -27,9 +27,7 @@ require.config({
 require(['router', 'config', 'utils', 'app', 'infra'], function(AppRouter, Config, Utils, App) {
 	AppRouter.registerRoutes();
 
-	Utils.loadModule(Config.app, function(App) {
-		_.each(Config.loadOnInit, function(modulo) {
-			Utils.loadModule(Config.modulos[modulo]);
-		});
+	_.each(Config.loadOnInit, function(modulo) {
+		Utils.loadModule(modulo);
 	});
 });

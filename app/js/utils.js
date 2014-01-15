@@ -4,15 +4,9 @@ define(function(require, exports, module) {
 	 * Params: String nome do módulo, Function callback
 	 * Retorno: callback
 	 */
-	var loadModule = function(modulo, callback) {
-		if(modulo) {
-			require([modulo.controller], function(mod) {
-				if(callback) {
-					callback(mod);
-				}
-			});
-		}
-	};
 
-	exports.loadModule = loadModule;
-})
+	exports.loadModule = function(moduleName, callback) {
+		moduleName = moduleName == 'app' ? 'app' : 'modules/' + moduleName + '/controller';
+		require([moduleName], callback);
+	};
+});

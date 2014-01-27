@@ -1,4 +1,4 @@
-define(function(require, exports, module){
+define(function (require, exports, module) {
 	var Marionette = require('marionette'),
 		Handlebars = require('handlebars'),
 		MenuView = require('views/menu'),
@@ -8,7 +8,7 @@ define(function(require, exports, module){
 
 	var App = new Marionette.Application();
 
-	Marionette.Renderer.render = function(template, data){
+	Marionette.Renderer.render = function (template, data) {
 		if (template) {
 			template = Handlebars.templates[template];
 			return template(data);
@@ -16,25 +16,25 @@ define(function(require, exports, module){
 	};
 
 	App.addRegions({
-		menu  : '#menu',
-		main  : '#main'
+		menu: '#menu',
+		main: '#main'
 	});
 
-	exports.showView = function(region, view) {
-		App.menu.show( new MenuView() );
+	exports.showView = function (region, view) {
+		App.menu.show(new MenuView());
 		App[region].show(view);
 	};
 
-	exports.index = function() {
+	exports.index = function () {
 		this.showView('main', new AppHomeView());
 	};
 
-	exports.pagina404 = function() {
+	exports.pagina404 = function () {
 		this.showView('main', new Pagina404View());
 	};
 
-	exports.closeModal = function() {
-		if(App.getRegion('modal')) {
+	exports.closeModal = function () {
+		if (App.getRegion('modal')) {
 			App.getRegion('modal').close();
 		}
 	};

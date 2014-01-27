@@ -1,9 +1,9 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 	var path = require('path');
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
-		livereloadPort : 4000,
+		livereloadPort: 4000,
 		connect: {
 			server: {
 				options: {
@@ -19,11 +19,11 @@ module.exports = function(grunt) {
 				dest: 'app/js/templates.js',
 				options: {
 					namespace: 'Handlebars.templates',
-					processName: function(filePath) {
+					processName: function (filePath) {
 						filePath = filePath.split('templates/');
 						return path.basename(filePath[0]) + '/' + filePath[1];
 					},
-					processPartialName: function(filePath) {
+					processPartialName: function (filePath) {
 						filePath = filePath.split('templates/');
 						return path.basename(filePath[0]) + '/' + filePath[1];
 					}
@@ -48,11 +48,11 @@ module.exports = function(grunt) {
 		},
 		jshint: {
 			options: {
-				'-W030'  : true,
-				'-W061'  : true,
-				'-W116'  : true,
-				'-W041'  : true,
-				'-W069'  : true
+				'-W030': true,
+				'-W061': true,
+				'-W116': true,
+				'-W041': true,
+				'-W069': true
 			},
 			files: ['app/js/**/*.js', '!**/libs/**/*.js', '!**/components/**/*.js', '!app/js/templates.js']
 		},
@@ -67,12 +67,10 @@ module.exports = function(grunt) {
 					findNestedDependencies: true,
 					removeCombined: true,
 					skipDirOptimize: true,
-					modules: [
-						{
-							name: 'main',
-							exclude: ['config']
-						}
-					]
+					modules: [{
+						name: 'main',
+						exclude: ['config']
+					}]
 				}
 			}
 		},
@@ -94,23 +92,18 @@ module.exports = function(grunt) {
 		replace: {
 			dist: {
 				options: {
-					patterns: [
-						{
-							match: 'versao',
-							replacement: '<%= pkg.version %>'
-						}
-					]
+					patterns: [{
+						match: 'versao',
+						replacement: '<%= pkg.version %>'
+					}]
 				},
-				files: [
-					{
-						src: 'dist/<%= pkg.version %>/index.html',
-						dest: 'dist/<%= pkg.version %>/index.html'
-					},
-					{
-						src: 'dist/<%= pkg.version %>/app/js/main.js',
-						dest: 'dist/<%= pkg.version %>/app/js/main.js'
-					}
-				]
+				files: [{
+					src: 'dist/<%= pkg.version %>/index.html',
+					dest: 'dist/<%= pkg.version %>/index.html'
+				}, {
+					src: 'dist/<%= pkg.version %>/app/js/main.js',
+					dest: 'dist/<%= pkg.version %>/app/js/main.js'
+				}]
 			}
 		},
 		'ftp-deploy': {

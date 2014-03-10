@@ -1,12 +1,10 @@
 define([
-	'backbone',
 	'backbone.babysitter',
+	'backbone',
 	'backbone.wreqr',
 	'bootstrap',
 	'handlebars',
-	'handlebars_helpers',
 	'jquery',
 	'marionette',
-	'templates',
 	'underscore'
 ], function () {});

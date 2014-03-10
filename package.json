@@ -3,19 +3,19 @@
 	"version": "0.0.1",
 	"private": true,
 	"volo": {
-		"baseDir": "app/js/libs",
+		"baseDir": "libs",
 		"dependencies": {
-			"../../css/bootstrap.min": "components/bootstrap#css/bootstrap.min.css",
-			"../../fonts": "components/bootstrap#fonts",
-			"bootstrap.min": "components/bootstrap#js/bootstrap.min.js",
-			"handlebars.runtime.min": "components/handlebars.js#handlebars.runtime.min.js",
-			"jquery.min": "components/jquery/~1#jquery.min.js",
-			"backbone.min": "amdjs/backbone#backbone-min.js",
-			"underscore.min": "amdjs/underscore#underscore-min.js",
-			"marionette.min": "marionettejs/backbone.marionette#lib/core/amd/backbone.marionette.min.js",
-			"babysitter.min": "marionettejs/backbone.babysitter#lib/amd/backbone.babysitter.min.js",
-			"wreqr.min": "marionettejs/backbone.wreqr#lib/amd/backbone.wreqr.min.js",
-			"require": "jrburke/requirejs"
+			"../css/bootstrap"    : "components/bootstrap#css/bootstrap.css",
+			"../fonts"            : "components/bootstrap#fonts",
+			"jquery"              : "components/jquery/~1",
+			"underscore"          : "jashkenas/underscore",
+			"backbone"            : "jashkenas/backbone",
+			"backbone.babysitter" : "marionettejs/backbone.babysitter",
+			"backbone.wreqr"      : "marionettejs/backbone.wreqr",
+			"marionette"          : "marionettejs/backbone.marionette#lib/core/amd/backbone.marionette.js",
+			"handlebars"          : "github:components/handlebars.js#handlebars.runtime.js",
+			"bootstrap"           : "components/bootstrap#js/bootstrap.js",
+			"require"             : "jrburke/requirejs"
 		}
 	},
 	"devDependencies": {
@@ -27,7 +27,7 @@
 		"grunt-contrib-requirejs": "*",
 		"grunt-replace": "*",
 		"grunt-contrib-clean": "*",
-		"grunt-ftp-deploy": "*"
+		"grunt-processhtml": "*"
 	},
 	"scripts": {
 		"preinstall": "npm install -g grunt-cli volo"

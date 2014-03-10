@@ -13,10 +13,7 @@ results
 
 npm-debug.log
 node_modules
-app/css/bootstrap.min.css
-app/fonts/glyphicons-halflings-regular.eot
-app/fonts/glyphicons-halflings-regular.svg
-app/fonts/glyphicons-halflings-regular.ttf
-app/fonts/glyphicons-halflings-regular.woff
-app/js/libs/
-app/js/templates.js
+libs
+fonts
+css/bootstrap.css
+application/templates/templates.js

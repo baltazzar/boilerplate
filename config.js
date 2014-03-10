@@ -1,16 +1,28 @@
-define(function(require, exports, module) {
+define(function(require, exports, module){
+
 	module.exports = {
 
-		'app': {
-			'routes': {
-				''      : 'index',
-				'*404'  : 'pagina404'
-			}
+		/**
+		 * Rotas da Aplicação
+		 *
+		 * As rotas com '@' são consideradas rotas especiais. Os filtros 'beforeSpecial' e 'afterSpecial'
+		 * são executados antes e depois da execução dessas rotas caso estejam definidos no controller.
+		 * Para as demais rotas os filtros 'before' e 'after' são executados caso estejam
+		 * definidos no controller.
+		 */
+		routes: {
+			''                         : 'application#index',
+			'@pessoas'                 : 'pessoas#listar',
+			'pessoas/:id'              : 'pessoas#detalhar',
+			'pessoas/:nome/:sobrenome' : 'pessoas#cumprimentar'
 		},
 
-		'modules': {},
-
-		'loadOnInit': [], // módulos carregados na inicialização da aplicação
-		'BASE_URL': 'http://CAMINHO_DA_APLICACAO/api'
-	}
+		/**
+		 * Regiões da Aplicação
+		 */
+		regions: {
+			menu : '#menu',
+			main : '#main'
+		}
+	};
 });

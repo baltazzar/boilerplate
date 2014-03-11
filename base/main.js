@@ -22,11 +22,14 @@ require.config({
 
 require(['infra']);
 
-require(['initializer', 'application'], function(Initializer, Application) {
+require(['initializer', 'application', 'dispatcher'], function(Initializer, Application, Dispatcher) {
 
-	// Run the initializers
+	// Executa as rotinas contidas no arquivo application/initializer.js
 	Initializer();
 
-	// Start the application
+	// Registra as rotas da aplicação
+	Dispatcher.registerRoutes();
+
+	// Inicia a aplicação
 	Application.start();
 });

@@ -1,7 +1,6 @@
 define(function(require, exports, module){
 
 	var Marionette = require('marionette'),
-		Dispatcher = require('dispatcher'),
 		Handlebars = require('handlebars'),
 		Templates = require('templates'),
 		Config = require('config'),
@@ -15,9 +14,8 @@ define(function(require, exports, module){
 
 	Application.addRegions(Config.regions);
 
-	Application.addInitializer(function() {
-		Dispatcher.registerRoutes();
-	});
+	// Código a ser executado na inicialização da aplicação.
+	Application.addInitializer(function() {});
 
 	module.exports = Application;
 });

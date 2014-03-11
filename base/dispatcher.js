@@ -13,6 +13,8 @@ define(function(require, exports, module){
 			if(_.contains(route, '@')) {
 				special = true;
 				route = _.rest(route).join('');
+			} else if(_.contains(route, '*')) {
+				special = null;
 			} else {
 				special = false;
 			}

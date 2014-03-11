@@ -6,6 +6,10 @@ define(function(require, exports, module){
 
 		index: function() {
 			console.log('INDEX');
+		},
+
+		pagina404: function() {
+			console.log('404');
 		}
 	});
 });

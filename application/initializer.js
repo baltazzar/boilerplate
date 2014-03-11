@@ -1,9 +1,5 @@
 define(function(require, exports, module){
 
-	/**
-	 * Runs before everything
-	 */
-	module.exports = function() {
-		// console.log('INITIALIZED!!!');
-	};
+	// Código a ser executado antes da inicialização da aplicação.
+	module.exports = function() {};
 });

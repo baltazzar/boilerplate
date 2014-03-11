@@ -4,25 +4,27 @@ define(function(require, exports, module){
 
 	var Controller = {
 
-		executionStopped: false,
+		aborted: false,
 
-		stopExecution: function() {
-			this.executionStopped = true;
+		abort: function() {
+			this.aborted = true;
 		},
 
 		execute: function(method, args, special) {
 
-			if(special) {
-				this.beforeSpecial();
-			} else {
-				this.before();
+			if(special !== null) {
+				if(special) {
+					this.beforeSpecial();
+				} else {
+					this.before();
+				}
 			}
 
-			if(!this.executionStopped) {
+			if(!this.aborted) {
 				this[method].apply(this, args);
 			}
 
-			if(!this.executionStopped) {
+			if(special !== null && !this.aborted) {
 				if(special) {
 					this.afterSpecial();
 				} else {

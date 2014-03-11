@@ -17,11 +17,7 @@ define(function(require, exports, module){
 					var args = _.initial(arguments);
 
 					require([controllerPath], function(Controller) {
-						if(special) {
-							Controller.execute(method, args, true);
-						} else {
-							Controller.execute(method, args, false);
-						}
+						Controller.execute(method, args, special);
 					});
 				});
 			});

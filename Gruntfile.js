@@ -1,6 +1,9 @@
 module.exports = function(grunt) {
+
 	var path = require('path'),
 		fs = require('fs');
+
+	require('jit-grunt')(grunt);
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -169,13 +172,4 @@ module.exports = function(grunt) {
 
 		fs.writeFileSync('base/infra.js', template);
 	});
-
-	grunt.loadNpmTasks('grunt-contrib-connect');
-	grunt.loadNpmTasks('grunt-contrib-handlebars');
-	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-contrib-jshint');
-	grunt.loadNpmTasks('grunt-contrib-requirejs');
-	grunt.loadNpmTasks('grunt-contrib-clean');
-	grunt.loadNpmTasks('grunt-replace');
-	grunt.loadNpmTasks('grunt-processhtml');
 };

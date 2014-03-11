@@ -26,21 +26,21 @@ Esse comando instalará o Boilerplate juntamente com as bibliotecas necessárias
 ```
 ├── application
 |	├── collections
-|	├── models
 |	├── controllers
-|	├── views
+|	├── models
 |	├── templates
+|	├── views
 |	├── application.js
 |	└── initializer.js
-|
 ├── base
 |	├── baseController.js
 |	├── dispatcher.js
 |	├── infra.js
 |	├── main.js
 |	└── router.js
-|
 ├── css
+|	├── boilerplate.css
+|	└── main.css
 ├── fonts
 ├── libs
 ├── config.js

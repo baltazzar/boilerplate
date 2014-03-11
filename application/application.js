@@ -1,12 +1,12 @@
 define(function(require, exports, module){
 
 	var Marionette = require('marionette'),
-		Handlebars = require('handlebars'),
-		Templates = require('templates'),
+		Handlebars = require('handlebars.runtime'),
+		Templates = require('templates')(Handlebars['default']),
 		Config = require('config'),
 		Application = new Marionette.Application();
 
-	Marionette.Renderer.render = function(template, data){
+	Marionette.Renderer.render = function(template, data) {
 		if(template) {
 			return Templates[template](data);
 		}

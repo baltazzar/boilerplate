@@ -3,7 +3,7 @@ define([
 	'backbone',
 	'backbone.wreqr',
 	'bootstrap',
-	'handlebars',
+	'handlebars.runtime',
 	'jquery',
 	'marionette',
 	'underscore'

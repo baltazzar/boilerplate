@@ -13,10 +13,7 @@ require.config({
 		'templates'      : '../application/templates/templates'
 	},
 	shim: {
-		'bootstrap': ['jquery'],
-		'handlebars': {
-			exports: 'Handlebars'
-		}
+		'bootstrap': ['jquery']
 	}
 });
 

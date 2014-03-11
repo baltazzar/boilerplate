@@ -23,8 +23,8 @@ module.exports = function(grunt) {
 				src: 'application/templates/**/*.tpl',
 				dest: 'application/templates/templates.js',
 				options: {
-					amd: true,
-					namespace: 'Handlebars.templates',
+					commonjs: true,
+					namespace: false,
 					processName: function(filePath) {
 						filePath = filePath.split('templates/');
 						return filePath[1];
@@ -53,7 +53,7 @@ module.exports = function(grunt) {
 			},
 			templates: {
 				files: 'application/templates/**/*.tpl',
-				tasks: ['handlebars'],
+				tasks: ['compileTemplates'],
 				options: {
 					atBegin: true
 				}
@@ -147,7 +147,7 @@ module.exports = function(grunt) {
 		}
 	});
 
-	grunt.registerTask('compile', ['handlebars']);
+	grunt.registerTask('compileTemplates', ['handlebars', 'amdify']);
 	grunt.registerTask('server', ['connect:server:keepalive']);
 	grunt.registerTask('dev', ['connect', 'watch']);
 	grunt.registerTask('build', ['jshint', 'requirejs', 'replace:dist', 'processhtml:dist', 'clean']);
@@ -171,5 +171,22 @@ module.exports = function(grunt) {
 		template = startTpl + '\n\t' + arrLibs + '\n' + endTpl;
 
 		fs.writeFileSync('base/infra.js', template);
+	});
+
+	grunt.registerTask('amdify', function() {
+
+		var templatesFile = fs.readFileSync('application/templates/templates.js', 'UTF8'),
+			startTpl = '//TEMPLATES\ndefine(function(require, exports, module){',
+			endTpl = '});',
+			template = null,
+			pattern = /\/\/TEMPLATES/;
+
+		if(pattern.test(templatesFile)) {
+			template = templatesFile;
+		} else {
+			template = startTpl + '\n' + templatesFile + '\n' + endTpl;
+		}
+
+		fs.writeFileSync('application/templates/templates.js', template);
 	});
 };

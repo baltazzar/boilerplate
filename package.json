@@ -28,7 +28,8 @@
 		"grunt-replace"            : "*",
 		"grunt-contrib-clean"      : "*",
 		"grunt-processhtml"        : "*",
-		"jit-grunt"                : "*"
+		"jit-grunt"                : "*",
+		"underscore"               : "*"
 	},
 	"scripts": {
 		"preinstall": "npm install -g grunt-cli volo"

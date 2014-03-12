@@ -1,0 +1,26 @@
+{
+	"waitSeconds": 0,
+	"urlArgs": "v=@@versao",
+	"paths": {
+		"baseController": "../base/baseController",
+		"dispatcher": "../base/dispatcher",
+		"router": "../base/router",
+		"application": "../application/application",
+		"initializer": "../application/initializer",
+		"templates": "../application/templates/templates",
+		"config": "../config",
+		"backbone.babysitter": "/libs/backbone.babysitter",
+		"backbone": "../libs/backbone",
+		"backbone.wreqr": "../libs/backbone.wreqr",
+		"bootstrap": "../libs/bootstrap",
+		"handlebars.runtime": "/libs/handlebars.runtime",
+		"jquery": "../libs/jquery",
+		"marionette": "/libs/marionette",
+		"underscore": "/libs/underscore"
+	},
+	"shim": {
+		"bootstrap": [
+			"jquery"
+		]
+	}
+}

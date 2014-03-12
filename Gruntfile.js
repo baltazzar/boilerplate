@@ -1,7 +1,6 @@
 module.exports = function(grunt) {
 
-	var path = require('path'),
-		fs = require('fs');
+	var path = require('path');
 
 	require('jit-grunt')(grunt);
 
@@ -38,15 +37,29 @@ module.exports = function(grunt) {
 		},
 		watch: {
 			files: {
-				files: ['**/*.{html,htm,css,js,tpl,png,jpg,gif}', '!application/templates/templates.js', '!libs/**', '!**/*.TMP'],
+				// files: ['**/*.{html,htm,css,js,tpl,png,jpg,gif}', '!application/templates/templates.js', '!libs/**', '!base/libs.js', '!requireConfig.json', '!**/*.TMP'],
+				files: [
+					'application/**',
+					'css/**',
+					'config.js',
+					'base/main.js',
+					'!application/templates/templates.js'
+				],
 				options: {
 					livereload: '<%= livereloadPort %>',
 					interval: 700
 				}
 			},
 			libs: {
-				files: 'libs/**/*.js',
-				tasks: ['infra'],
+				files: ['libs/**/*.js'],
+				tasks: ['updateRequireLibs'],
+				options: {
+					atBegin: true
+				}
+			},
+			main: {
+				files: ['requireConfig.json'],
+				tasks: ['updateRequireMain'],
 				options: {
 					atBegin: true
 				}
@@ -70,31 +83,47 @@ module.exports = function(grunt) {
 				'-W044' : true,
 				'-W099' : true
 			},
-			files: ['**/*.js', '!libs/**/*.js', '!application/templates/templates.js', '!node_modules/**/*.js']
+			files: ['**/*.js', '!libs/**/*.js', '!application/templates/templates.js', 'dist/**', '!node_modules/**/*.js']
 		},
 		requirejs: {
 			build: {
 				options: {
-					mainConfigFile: 'base/main.js',
-					appDir: './',
-					baseUrl: 'application',
-					dir: 'dist/<%= pkg.version %>',
-					optimizeCss: 'standard',
-					findNestedDependencies: true,
-					removeCombined: true,
-					skipDirOptimize: true,
-
+					mainConfigFile         : 'base/main.js',
+					appDir                 : './',
+					baseUrl                : 'base',
+					dir                    : 'dist/<%= pkg.version %>',
+					findNestedDependencies : true,
+					removeCombined         : true,
+					skipDirOptimize        : true,
+					optimizeCss            : false,
 					paths: {
-						'requireLib': 'libs/require'
+						'backbone.babysitter' : '../libs/backbone.babysitter',
+						'backbone'            : '../libs/backbone',
+						'backbone.wreqr'      : '../libs/backbone.wreqr',
+						'bootstrap'           : '../libs/bootstrap',
+						'handlebars.runtime'  : '../libs/handlebars.runtime',
+						'jquery'              : '../libs/jquery',
+						'marionette'          : '../libs/marionette',
+						'underscore'          : '../libs/underscore',
+						'config': '../config'
 					},
-
-					modules: [
+					modules                : [
 						{
 							name: 'main',
-							include: 'requireLib',
-							exclude: ['config']
+							exclude: 'config'
 						}
 					]
+					// baseUrl                : 'base',
+					// // paths               : {
+					// // 	'almondLib'        : 'libs/almond'
+					// // },
+					// // modules: [
+					// // 	{
+					// // 		name: 'main',
+					// // 		include: 'almondLib',
+					// // 		exclude: ['config']
+					// // 	}
+					// // ]
 				}
 			}
 		},
@@ -147,46 +176,12 @@ module.exports = function(grunt) {
 		}
 	});
 
-	grunt.registerTask('compileTemplates', ['handlebars', 'amdify']);
+	grunt.registerTask('compileTemplates', ['handlebars', 'amdifyTemplates']);
 	grunt.registerTask('server', ['connect:server:keepalive']);
 	grunt.registerTask('dev', ['connect', 'watch']);
 	grunt.registerTask('build', ['jshint', 'requirejs', 'replace:dist', 'processhtml:dist', 'clean']);
 
-	grunt.registerTask('infra', function() {
-
-		var files = fs.readdirSync('libs'),
-			startTpl = 'define([',
-			endTpl = '], function () {});',
-			template = null,
-			arrLibs = [];
-
-		files.forEach(function(file) {
-			if(file !== 'require.js') {
-				arrLibs.push("'" + file.split('.js')[0] + "'");
-			}
-		});
-
-		arrLibs = arrLibs.join(',\n\t');
-
-		template = startTpl + '\n\t' + arrLibs + '\n' + endTpl;
-
-		fs.writeFileSync('base/infra.js', template);
-	});
-
-	grunt.registerTask('amdify', function() {
-
-		var templatesFile = fs.readFileSync('application/templates/templates.js', 'UTF8'),
-			startTpl = '//TEMPLATES\ndefine(function(require, exports, module){',
-			endTpl = '});',
-			template = null,
-			pattern = /\/\/TEMPLATES/;
-
-		if(pattern.test(templatesFile)) {
-			template = templatesFile;
-		} else {
-			template = startTpl + '\n' + templatesFile + '\n' + endTpl;
-		}
-
-		fs.writeFileSync('application/templates/templates.js', template);
-	});
+	grunt.registerTask('updateRequireMain', require('./customTasks/updateRequireMain'));
+	grunt.registerTask('updateRequireLibs', require('./customTasks/updateRequireLibs'));
+	grunt.registerTask('amdifyTemplates', require('./customTasks/amdifyTemplates'));
 };

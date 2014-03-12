@@ -35,5 +35,5 @@ define(function(require, exports, module){
 		require(['application', view], function(Application, View) {
 			Application[region].show(new View(options));
 		});
-	}
+	};
 });

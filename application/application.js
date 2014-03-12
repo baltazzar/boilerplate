@@ -1,8 +1,8 @@
 define(function(require, exports, module){
 
 	var Marionette = require('marionette'),
-		Handlebars = require('handlebars.runtime'),
-		Templates = require('templates')(Handlebars['default']),
+		Handlebars = require('handlebars.runtime')['default'],
+		Templates = require('templates')(Handlebars),
 		Config = require('config'),
 		Application = new Marionette.Application();
 

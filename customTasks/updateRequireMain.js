@@ -6,13 +6,15 @@ var fs = require('fs'),
 	configBlock = startTpl + '\nrequire.config(' + requireConfigFile + ');\n' + endTpl,
 	template = null;
 
-module.exports = function() {
+module.exports = function(grunt) {
 
-	if(new RegExp(startTpl).test(mainFile)) {
-		template = mainFile.replace(new RegExp(startTpl + '((.|\n|\r|\t)*)' + endTpl), configBlock);
-	} else {
-		template = configBlock + '\n\n' + mainFile;
-	}
+	grunt.registerTask('updateRequireMain', function() {
+		if(new RegExp(startTpl).test(mainFile)) {
+			template = mainFile.replace(new RegExp(startTpl + '((.|\n|\r|\t)*)' + endTpl), configBlock);
+		} else {
+			template = configBlock + '\n\n' + mainFile;
+		}
 
-	fs.writeFileSync('base/main.js', template);
+		fs.writeFileSync('base/main.js', template);
+	});
 };

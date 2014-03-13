@@ -5,13 +5,15 @@ var fs = require('fs'),
 	template = null,
 	pattern = /\/\/TEMPLATES/;
 
-module.exports = function() {
+module.exports = function(grunt) {
 
-	if(pattern.test(templatesFile)) {
-		template = templatesFile;
-	} else {
-		template = startTpl + '\n' + templatesFile + '\n' + endTpl;
-	}
+	grunt.registerTask('amdifyTemplates', function() {
+		if(pattern.test(templatesFile)) {
+			template = templatesFile;
+		} else {
+			template = startTpl + '\n' + templatesFile + '\n' + endTpl;
+		}
 
-	fs.writeFileSync('application/templates/templates.js', template);
+		fs.writeFileSync('application/templates/templates.js', template);
+	});
 };

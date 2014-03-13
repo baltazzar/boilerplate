@@ -23,19 +23,21 @@ var updateRequirePaths = function() {
 	fs.writeFileSync('requireConfig.json', JSON.stringify(requireConfigFile, null, '\t'));
 };
 
-module.exports = function() {
+module.exports = function(grunt) {
 
-	libs.forEach(function(lib) {
-		if(lib !== 'require.js' && lib !== 'almond.js') {
-			arrLibs.push("'" + lib.split('.js')[0] + "'");
-		}
+	grunt.registerTask('updateRequireLibs', function() {
+		libs.forEach(function(lib) {
+			if(lib !== 'require.js' && lib !== 'almond.js') {
+				arrLibs.push("'" + lib.split('.js')[0] + "'");
+			}
+		});
+
+		arrLibs = arrLibs.join(',\n\t');
+
+		template = startTpl + '\n\t' + arrLibs + '\n' + endTpl;
+
+		fs.writeFileSync('base/libs.js', template);
+
+		updateRequirePaths();
 	});
-
-	arrLibs = arrLibs.join(',\n\t');
-
-	template = startTpl + '\n\t' + arrLibs + '\n' + endTpl;
-
-	fs.writeFileSync('base/libs.js', template);
-
-	updateRequirePaths();
 };

@@ -3,6 +3,7 @@ module.exports = function(grunt) {
 	var path = require('path');
 
 	require('jit-grunt')(grunt);
+	grunt.loadTasks('customTasks');
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -179,9 +180,6 @@ module.exports = function(grunt) {
 	grunt.registerTask('compileTemplates', ['handlebars', 'amdifyTemplates']);
 	grunt.registerTask('server', ['connect:server:keepalive']);
 	grunt.registerTask('dev', ['connect', 'watch']);
+	grunt.registerTask('default', ['dev']);
 	grunt.registerTask('build', ['jshint', 'requirejs', 'replace:dist', 'processhtml:dist', 'clean']);
-
-	grunt.registerTask('updateRequireMain', require('./customTasks/updateRequireMain'));
-	grunt.registerTask('updateRequireLibs', require('./customTasks/updateRequireLibs'));
-	grunt.registerTask('amdifyTemplates', require('./customTasks/amdifyTemplates'));
 };

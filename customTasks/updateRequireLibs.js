@@ -5,19 +5,26 @@ var fs = require('fs'),
 	startTpl = 'define([',
 	endTpl = '], function () {});',
 	template = null,
-	arrLibs = [];
+	arrLibs = [],
+	paths = {},
+	libsPaths = {};
 
 var updateRequirePaths = function() {
 
-	var libsPaths = {};
-
-	libs.forEach(function(lib) {
+	_.each(libs, function(lib) {
 		if(lib !== 'require.js' && lib !== 'almond.js') {
 			lib = lib.split('.js')[0];
 			libsPaths[lib] = '../libs/' + lib;
 		}
 	});
 
+	_.each(requireConfigFile.paths, function(v, k) {
+		if(v.indexOf('libs/') === -1) {
+			paths[k] = v;
+		}
+	});
+
+	requireConfigFile.paths = paths;
 	requireConfigFile.paths = _.extend(requireConfigFile.paths, libsPaths);
 
 	fs.writeFileSync('requireConfig.json', JSON.stringify(requireConfigFile, null, '\t'));
@@ -26,14 +33,14 @@ var updateRequirePaths = function() {
 module.exports = function(grunt) {
 
 	grunt.registerTask('updateRequireLibs', function() {
-		libs.forEach(function(lib) {
+
+		_.each(libs, function(lib) {
 			if(lib !== 'require.js' && lib !== 'almond.js') {
 				arrLibs.push("'" + lib.split('.js')[0] + "'");
 			}
 		});
 
 		arrLibs = arrLibs.join(',\n\t');
-
 		template = startTpl + '\n\t' + arrLibs + '\n' + endTpl;
 
 		fs.writeFileSync('base/libs.js', template);

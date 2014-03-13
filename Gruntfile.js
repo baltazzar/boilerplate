@@ -44,7 +44,7 @@ module.exports = function(grunt) {
 					'css/**',
 					'config.js',
 					'base/main.js',
-					'!application/templates/templates.js'
+					'application/templates/templates.js'
 				],
 				options: {
 					livereload: '<%= livereloadPort %>',
@@ -67,7 +67,7 @@ module.exports = function(grunt) {
 			},
 			templates: {
 				files: 'application/templates/**/*.tpl',
-				tasks: ['compileTemplates'],
+				tasks: ['handlebars', 'amdifyTemplates'],
 				options: {
 					atBegin: true
 				}
@@ -177,9 +177,8 @@ module.exports = function(grunt) {
 		}
 	});
 
-	grunt.registerTask('compileTemplates', ['handlebars', 'amdifyTemplates']);
 	grunt.registerTask('server', ['connect:server:keepalive']);
 	grunt.registerTask('dev', ['connect', 'watch']);
-	grunt.registerTask('default', ['dev']);
 	grunt.registerTask('build', ['jshint', 'requirejs', 'replace:dist', 'processhtml:dist', 'clean']);
+	grunt.registerTask('default', ['dev']);
 };

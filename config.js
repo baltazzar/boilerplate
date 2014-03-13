@@ -11,11 +11,8 @@ define(function(require, exports, module){
 		 * definidos no controller.
 		 */
 		routes: {
-			'*404'                     : 'application#pagina404',
-			''                         : 'application#index',
-			'@pessoas'                 : 'pessoas#listar',
-			'pessoas/:id'              : 'pessoas#detalhar',
-			'pessoas/:nome/:sobrenome' : 'pessoas#cumprimentar'
+			'*404' : 'application#pagina404',
+			''     : 'application#index'
 		},
 
 		/**

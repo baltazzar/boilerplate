@@ -9,7 +9,7 @@ define(function(require, exports, module){
 		},
 
 		index: function() {
-			console.log('INDEX');
+			this.renderView('main', 'index');
 		},
 
 		pagina404: function() {

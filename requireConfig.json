@@ -7,16 +7,20 @@
 		"router": "../base/router",
 		"application": "../application/application",
 		"initializer": "../application/initializer",
+		"collections": "../application/collections",
+		"controllers": "../application/controllers",
+		"models": "../application/models",
 		"templates": "../application/templates/templates",
+		"views": "../application/views",
 		"config": "../config",
-		"backbone.babysitter": "/libs/backbone.babysitter",
+		"backbone.babysitter": "../libs/backbone.babysitter",
 		"backbone": "../libs/backbone",
 		"backbone.wreqr": "../libs/backbone.wreqr",
 		"bootstrap": "../libs/bootstrap",
-		"handlebars.runtime": "/libs/handlebars.runtime",
+		"handlebars.runtime": "../libs/handlebars.runtime",
 		"jquery": "../libs/jquery",
-		"marionette": "/libs/marionette",
-		"underscore": "/libs/underscore"
+		"marionette": "../libs/marionette",
+		"underscore": "../libs/underscore"
 	},
 	"shim": {
 		"bootstrap": [

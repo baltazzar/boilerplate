@@ -4,6 +4,10 @@ define(function(require, exports, module){
 
 	module.exports = BaseController.extend({
 
+		before: function() {
+			this.renderView('menu', 'menu');
+		},
+
 		index: function() {
 			console.log('INDEX');
 		},

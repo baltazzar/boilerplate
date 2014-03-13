@@ -40,11 +40,12 @@ module.exports = function(grunt) {
 			files: {
 				// files: ['**/*.{html,htm,css,js,tpl,png,jpg,gif}', '!application/templates/templates.js', '!libs/**', '!base/libs.js', '!requireConfig.json', '!**/*.TMP'],
 				files: [
+					'index.html',
 					'application/**',
 					'css/**',
 					'config.js',
 					'base/main.js',
-					'application/templates/templates.js'
+					'!application/templates/templates.js'
 				],
 				options: {
 					livereload: '<%= livereloadPort %>',

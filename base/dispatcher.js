@@ -31,7 +31,7 @@ define(function(require, exports, module){
 		Backbone.history.start();
 	};
 
-	exports.renderView = function(view, region, options) {
+	exports.renderView = function(region, view, options) {
 		require(['application', view], function(Application, View) {
 			Application[region].show(new View(options));
 		});

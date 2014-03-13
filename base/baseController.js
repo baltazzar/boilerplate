@@ -41,9 +41,9 @@ define(function(require, exports, module){
 
 		afterSpecial: function() {},
 
-		renderView: function(view, region, options) {
+		renderView: function(region, view, options) {
 			var viewPath = '../application/views/' + view;
-			Dispatcher.renderView(viewPath, region, options);
+			Dispatcher.renderView(region, viewPath, options);
 		}
 	};
 

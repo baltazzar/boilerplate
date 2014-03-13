@@ -21,6 +21,8 @@ define(function(require, exports, module){
 		regions: {
 			menu : '#menu',
 			main : '#main'
-		}
+		},
+
+		cdnUrl: 'http://servicos.sorocaba.sp.gov.br/cdn'
 	};
 });

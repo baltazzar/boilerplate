@@ -9,6 +9,7 @@ var fs = require('fs'),
 module.exports = function(grunt) {
 
 	grunt.registerTask('updateRequireMain', function() {
+
 		if(new RegExp(startTpl).test(mainFile)) {
 			template = mainFile.replace(new RegExp(startTpl + '((.|\n|\r|\t)*)' + endTpl), configBlock);
 		} else {

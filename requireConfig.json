@@ -12,15 +12,7 @@
 		"models": "../application/models",
 		"templates": "../application/templates/templates",
 		"views": "../application/views",
-		"config": "../config",
-		"backbone.babysitter": "../libs/backbone.babysitter",
-		"backbone": "../libs/backbone",
-		"backbone.wreqr": "../libs/backbone.wreqr",
-		"bootstrap": "../libs/bootstrap",
-		"handlebars.runtime": "../libs/handlebars.runtime",
-		"jquery": "../libs/jquery",
-		"marionette": "../libs/marionette",
-		"underscore": "../libs/underscore"
+		"config": "../config"
 	},
 	"shim": {
 		"bootstrap": [

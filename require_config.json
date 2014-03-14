@@ -2,7 +2,7 @@
 	"waitSeconds": 0,
 	"urlArgs": "v=@@versao",
 	"paths": {
-		"baseController": "../base/base_controller",
+		"base_controller": "../base/base_controller",
 		"dispatcher": "../base/dispatcher",
 		"router": "../base/router",
 		"application": "../application/application",
@@ -12,6 +12,7 @@
 		"models": "../application/models",
 		"templates": "../application/templates/templates",
 		"views": "../application/views",
+		"handlebars_helpers": "../application/handlebars_helpers",
 		"config": "../config",
 		"backbone.babysitter": "../libs/backbone.babysitter",
 		"backbone": "../libs/backbone",

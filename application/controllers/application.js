@@ -1,6 +1,6 @@
 define(function(require, exports, module){
 
-	var BaseController = require('baseController');
+	var BaseController = require('base_controller');
 
 	module.exports = BaseController.extend({
 

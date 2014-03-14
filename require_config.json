@@ -1,7 +1,7 @@
 {
 	"waitSeconds": 0,
 	"urlArgs": "v=@@versao",
-	"baseUrl": "../application",
+	"baseUrl": "application",
 	"paths": {
 		"base_controller": "../base/base_controller",
 		"dispatcher": "../base/dispatcher",

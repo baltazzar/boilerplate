@@ -9,7 +9,7 @@ define(function(require, exports, module){
 
 			_.each(routes, function(r) {
 				var route = r.route,
-					controllerPath = '../application/controllers/' + r.controller,
+					controllerPath = 'controllers/' + r.controller,
 					method = r.method,
 					special = r.special;
 

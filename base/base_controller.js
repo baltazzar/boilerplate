@@ -42,7 +42,7 @@ define(function(require, exports, module){
 		afterSpecial: function() {},
 
 		renderView: function(region, view, options) {
-			var viewPath = '../application/views/' + view;
+			var viewPath = 'views/' + view;
 			Dispatcher.renderView(region, viewPath, options);
 		}
 	};

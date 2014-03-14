@@ -90,42 +90,21 @@ module.exports = function(grunt) {
 		requirejs: {
 			build: {
 				options: {
+					baseUrl                : 'application',
 					mainConfigFile         : 'base/main.js',
-					appDir                 : './',
-					baseUrl                : 'base',
+					appDir                 : '.',
 					dir                    : 'dist/<%= pkg.version %>',
 					findNestedDependencies : true,
 					removeCombined         : true,
 					skipDirOptimize        : true,
-					optimizeCss            : false,
+					optimizeCss            : 'standard',
+					optimize               : 'none',
 					paths: {
-						'backbone.babysitter' : '../libs/backbone.babysitter',
-						'backbone'            : '../libs/backbone',
-						'backbone.wreqr'      : '../libs/backbone.wreqr',
-						'bootstrap'           : '../libs/bootstrap',
-						'handlebars.runtime'  : '../libs/handlebars.runtime',
-						'jquery'              : '../libs/jquery',
-						'marionette'          : '../libs/marionette',
-						'underscore'          : '../libs/underscore',
-						'config': '../config'
+						requireLib : '../libs/require'
 					},
-					modules                : [
-						{
-							name: 'main',
-							exclude: 'config'
-						}
-					]
-					// baseUrl                : 'base',
-					// // paths               : {
-					// // 	'almondLib'        : 'libs/almond'
-					// // },
-					// // modules: [
-					// // 	{
-					// // 		name: 'main',
-					// // 		include: 'almondLib',
-					// // 		exclude: ['config']
-					// // 	}
-					// // ]
+					name                   : '../base/main',
+					include                : ['requireLib', '../base/controllers', '../base/views'],
+					exclude                : ['config']
 				}
 			}
 		},

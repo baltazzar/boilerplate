@@ -23,6 +23,6 @@ define(function(require, exports, module){
 			main : '#main'
 		},
 
-		cdnUrl: 'http://servicos.sorocaba.sp.gov.br/cdn'
+		CDN_URL: 'http://servicos.sorocaba.sp.gov.br/cdn'
 	};
 });

@@ -4,6 +4,7 @@ define(function(require, exports, module){
 		Handlebars = require('handlebars.runtime')['default'],
 		Templates = require('templates')(Handlebars),
 		Config = require('config'),
+		Handlebars_Helpers = require('../application/handlebars_helpers'),
 		Application = new Marionette.Application();
 
 	Marionette.Renderer.render = function(template, data) {

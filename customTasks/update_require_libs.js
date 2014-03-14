@@ -6,6 +6,8 @@ var fs = require('fs'),
 	endTpl = '], function () {});',
 	template = null,
 	arrLibs = [],
+	arrViews = [],
+	arrControllers = [],
 	paths = {},
 	libsPaths = {};
 
@@ -46,5 +48,27 @@ module.exports = function(grunt) {
 		fs.writeFileSync('base/libs.js', template);
 
 		updateRequirePaths();
+
+		// Cria o arquivo com os mapeamentos das views
+		_.each(grunt.file.expand('application/views/**/*.js'), function(view) {
+			view = view.split('application/')[1];
+			view = view.split('.js')[0];
+			arrViews.push("'" + view + "'");
+		});
+
+		arrViews = arrViews.join(',\n\t');
+		template = startTpl + '\n\t' + arrViews + '\n' + endTpl;
+		fs.writeFileSync('base/views.js', template);
+
+		// Cria o arquivo com os mapeamentos dos controllers
+		_.each(grunt.file.expand('application/controllers/**/*.js'), function(controller) {
+			controller = controller.split('application/')[1];
+			controller = controller.split('.js')[0];
+			arrControllers.push("'" + controller + "'");
+		});
+
+		arrControllers = arrControllers.join(',\n\t');
+		template = startTpl + '\n\t' + arrControllers + '\n' + endTpl;
+		fs.writeFileSync('base/controllers.js', template);
 	});
 };

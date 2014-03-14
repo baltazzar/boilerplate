@@ -8,8 +8,8 @@ define(function(require, exports, module){
 			this.renderView('menu', 'menu');
 		},
 
-		index: function() {
-			this.renderView('main', 'index');
+		home: function() {
+			this.renderView('main', 'home');
 		},
 
 		pagina404: function() {

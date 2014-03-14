@@ -4,7 +4,7 @@ define(function(require, exports, module){
 		Config = require('config');
 
 	module.exports = Marionette.ItemView.extend({
-		template: 'index.tpl',
+		template: 'home.tpl',
 
 		initialize: function() {
 			$('.logotipo-prefeitura').attr('src', Config.cdnUrl + '/sorocaba_alpha.png');

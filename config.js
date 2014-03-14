@@ -12,7 +12,7 @@ define(function(require, exports, module){
 		 */
 		routes: {
 			'*404' : 'application#pagina404',
-			''     : 'application#index'
+			''     : 'application#home'
 		},
 
 		/**

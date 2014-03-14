@@ -2,7 +2,7 @@
 	"waitSeconds": 0,
 	"urlArgs": "v=@@versao",
 	"paths": {
-		"baseController": "../base/baseController",
+		"baseController": "../base/base_controller",
 		"dispatcher": "../base/dispatcher",
 		"router": "../base/router",
 		"application": "../application/application",
@@ -12,7 +12,15 @@
 		"models": "../application/models",
 		"templates": "../application/templates/templates",
 		"views": "../application/views",
-		"config": "../config"
+		"config": "../config",
+		"backbone.babysitter": "../libs/backbone.babysitter",
+		"backbone": "../libs/backbone",
+		"backbone.wreqr": "../libs/backbone.wreqr",
+		"bootstrap": "../libs/bootstrap",
+		"handlebars.runtime": "../libs/handlebars.runtime",
+		"jquery": "../libs/jquery",
+		"marionette": "../libs/marionette",
+		"underscore": "../libs/underscore"
 	},
 	"shim": {
 		"bootstrap": [

@@ -1,6 +1,6 @@
 var fs = require('fs'),
 	mainFile = fs.readFileSync('base/main.js', 'utf8'),
-	requireConfigFile = fs.readFileSync('requireConfig.json', 'utf8'),
+	requireConfigFile = fs.readFileSync('require_config.json', 'utf8'),
 	startTpl = '//START REQUIRE CONFIG',
 	endTpl = '//END REQUIRE CONFIG',
 	configBlock = startTpl + '\nrequire.config(' + requireConfigFile + ');\n' + endTpl,

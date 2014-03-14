@@ -60,7 +60,7 @@ module.exports = function(grunt) {
 				}
 			},
 			main: {
-				files: ['requireConfig.json'],
+				files: ['require_config.json'],
 				tasks: ['updateRequireMain'],
 				options: {
 					atBegin: true

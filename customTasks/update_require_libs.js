@@ -1,7 +1,7 @@
 var fs = require('fs'),
 	_ = require('underscore'),
 	libs = fs.readdirSync('libs'),
-	requireConfigFile = JSON.parse(fs.readFileSync('requireConfig.json', 'utf8')),
+	requireConfigFile = JSON.parse(fs.readFileSync('require_config.json', 'utf8')),
 	startTpl = 'define([',
 	endTpl = '], function () {});',
 	template = null,
@@ -27,7 +27,7 @@ var updateRequirePaths = function() {
 	requireConfigFile.paths = paths;
 	requireConfigFile.paths = _.extend(requireConfigFile.paths, libsPaths);
 
-	fs.writeFileSync('requireConfig.json', JSON.stringify(requireConfigFile, null, '\t'));
+	fs.writeFileSync('require_config.json', JSON.stringify(requireConfigFile, null, '\t'));
 };
 
 module.exports = function(grunt) {

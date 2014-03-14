@@ -27,8 +27,8 @@
 		<script data-main="base/main.js?v=@@versao" src="libs/require.js"></script>
 		<script>
 			(function() {
-				require(['../config', '../libs/jquery'], function(Config) {
-					$('.logotipo-setor').attr('src', Config.CDN_URL + '/logotipo_setor.png');
+				require(['../config'], function(Config) {
+					document.getElementsByClassName('logotipo-setor')[0].src = Config.CDN_URL + '/logotipo_setor.png';
 				});
 			})();
 		</script>

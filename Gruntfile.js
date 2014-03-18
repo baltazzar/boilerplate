@@ -1,9 +1,17 @@
 module.exports = function(grunt) {
 
-	var path = require('path');
-
 	require('jit-grunt')(grunt);
-	grunt.loadTasks('customTasks');
+
+	var createAliases = function(aliases) {
+		var arrAliases = [];
+		aliases.forEach(function(alias) {
+			grunt.file.expandMapping(alias.src, alias.dest, alias).forEach(function(a) {
+				var expose = a.dest.substr(0, a.dest.lastIndexOf('.'));
+				arrAliases.push(a.src + ':' + expose);
+			});
+		});
+		return arrAliases;
+	};
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -15,6 +23,33 @@ module.exports = function(grunt) {
 					port: 3000,
 					livereload: '<%= livereloadPort %>',
 					open: 'http://localhost:3000'
+				}
+			}
+		},
+		watch: {
+			libs: {
+				files: ['libs/**/*.js'],
+				tasks: ['browserify:libs']
+			},
+			templates: {
+				files: ['application/templates/**/*.tpl'],
+				tasks: ['handlebars']
+			},
+			application: {
+				files: ['application/**/*.js'],
+				tasks: ['browserify:application'],
+			},
+			static: {
+				files: ['index.html', 'css/**/*.css', 'config.json'],
+				options: {
+					livereload: '<%= livereloadPort %>'
+				}
+			},
+			reload: {
+				files: ['application.js'],
+				options: {
+					livereload: '<%= livereloadPort %>',
+					interval: 700
 				}
 			}
 		},
@@ -36,42 +71,95 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		watch: {
-			files: {
-				// files: ['**/*.{html,htm,css,js,tpl,png,jpg,gif}', '!application/templates/templates.js', '!libs/**', '!base/libs.js', '!requireConfig.json', '!**/*.TMP'],
-				files: [
-					'index.html',
-					'application/**',
-					'css/**',
-					'config.js',
-					'base/main.js',
-					'!application/templates/templates.js'
-				],
-				options: {
-					livereload: '<%= livereloadPort %>',
-					interval: 700
-				}
-			},
+		browserify: {
 			libs: {
-				files: ['libs/**/*.js'],
-				tasks: ['updateRequireLibs'],
+				src: [],
+				dest: './libs.js',
 				options: {
-					atBegin: true
+					alias: createAliases([
+						{
+							cwd: 'libs',
+							src: ['**/*.js'],
+							dest: ''
+						}
+					])
 				}
 			},
-			main: {
-				files: ['require_config.json'],
-				tasks: ['updateRequireMain'],
+			application: {
+				src: ['base/main.js'],
+				dest: 'application.js',
 				options: {
-					atBegin: true
+					alias: createAliases([
+						{
+							cwd: 'libs',
+							src: ['**/*.js'],
+							dest: ''
+						},
+						{
+							src: ['config.js'],
+							dest: ''
+						},
+						{
+							cwd: 'base',
+							src: ['**/*.js'],
+							dest: ''
+						},
+						{
+							cwd: 'application',
+							src: ['**/*.js'],
+							dest: ''
+						},
+						{
+							cwd: 'application/templates',
+							src: ['templates.js'],
+							dest: ''
+						}
+					])
 				}
-			},
-			templates: {
-				files: 'application/templates/**/*.tpl',
-				tasks: ['handlebars', 'amdifyTemplates'],
+			}
+		},
+		cssmin: {
+			'dist/<%= pkg.version %>/application.min.css': ['css/**/*.css', '!main.css'],
+			options: {
+				keepSpecialComments: 0
+			}
+		},
+		uglify: {
+			'dist/<%= pkg.version %>/application.min.js': ['libs.js', 'application.js']
+		},
+		copy: {
+			dist: {
+				'dist/<%= pkg.version %>/index.html': ['index.html'],
+				'dist/<%= pkg.version %>/config.json': ['config.json']
+			}
+			// deploy: {
+			// 	expand: true,
+			// 	cwd: 'dist/<%= pkg.version %>',
+			// 	src: '**',
+			// 	dest: '//pms-teweb02/sistemas/TESTE/',
+			// 	flatten: true
+			// }
+		},
+		replace: {
+			dist: {
+				files: [{
+					src: 'dist/<%= pkg.version %>/index.html',
+					dest: 'dist/<%= pkg.version %>/index.html'
+				}],
 				options: {
-					atBegin: true
+					patterns: [{
+						match: 'versao',
+						replacement: '<%= pkg.version %>'
+					}]
 				}
+			}
+		},
+		processhtml: {
+			dist: {
+				files: [{
+					src: 'dist/<%= pkg.version %>/index.html',
+					dest: 'dist/<%= pkg.version %>/index.html'
+				}]
 			}
 		},
 		jshint: {
@@ -85,80 +173,12 @@ module.exports = function(grunt) {
 				'-W044' : true,
 				'-W099' : true
 			},
-			files: ['**/*.js', '!libs/**/*.js', '!application/templates/templates.js', 'dist/**', '!node_modules/**/*.js']
-		},
-		requirejs: {
-			build: {
-				options: {
-					baseUrl                : 'application',
-					mainConfigFile         : 'base/main.js',
-					appDir                 : '.',
-					dir                    : 'dist/<%= pkg.version %>',
-					findNestedDependencies : true,
-					removeCombined         : true,
-					skipDirOptimize        : true,
-					optimizeCss            : 'standard',
-					optimize               : 'none',
-					paths: {
-						requireLib : '../libs/require'
-					},
-					name                   : '../base/main',
-					include                : ['requireLib', '../base/controllers', '../base/views'],
-					exclude                : ['config']
-				}
-			}
-		},
-		clean: {
-			dist: {
-				options: {
-					force: true
-				},
-				src: [
-					'dist/<%= pkg.version %>/Gruntfile.js',
-					'dist/<%= pkg.version %>/package.json',
-					'dist/<%= pkg.version %>/build.txt',
-					'dist/<%= pkg.version %>/.ftppass',
-					'dist/<%= pkg.version %>/.gitignore',
-					'dist/<%= pkg.version %>/application/templates',
-					'dist/<%= pkg.version %>/Tarefas.todo',
-					'dist/<%= pkg.version %>/**/node_modules'
-				]
-			}
-		},
-		replace: {
-			dist: {
-				options: {
-					patterns: [
-						{
-							match: 'versao',
-							replacement: '<%= pkg.version %>'
-						}
-					]
-				},
-				files: [
-					{
-						src: 'dist/<%= pkg.version %>/index.html',
-						dest: 'dist/<%= pkg.version %>/index.html'
-					},
-					{
-						src: 'dist/<%= pkg.version %>/application/main.js',
-						dest: 'dist/<%= pkg.version %>/application/main.js'
-					}
-				]
-			}
-		},
-		processhtml: {
-			dist: {
-				files: [{
-					src: 'dist/<%= pkg.version %>/index.html',
-					dest: 'dist/<%= pkg.version %>/index.html'
-				}]
-			}
+			files: ['application/**/*.js', '!application/templates/templates.js']
 		}
 	});
 
-	grunt.registerTask('server', ['connect:server:keepalive']);
 	grunt.registerTask('dev', ['connect', 'watch']);
-	grunt.registerTask('build', ['jshint', 'requirejs', 'replace:dist', 'processhtml:dist', 'clean']);
-	grunt.registerTask('default', ['dev']);
+	grunt.registerTask('default', ['handlebars', 'browserify', 'connect', 'watch']);
+	grunt.registerTask('build', ['jshint', 'browserify', 'uglify', 'cssmin', 'copy:dist', 'replace', 'processhtml']);
+	// grunt.registerTask('deploy', ['copy:deploy']);
 };

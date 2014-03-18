@@ -1,8 +1,5 @@
-define(function(require, exports, module){
+var Marionette = require('marionette');
 
-	var Marionette = require('marionette');
-
-	module.exports = Marionette.ItemView.extend({
-		template: 'menu.tpl'
-	});
+module.exports = Marionette.ItemView.extend({
+	template: 'menu.tpl'
 });

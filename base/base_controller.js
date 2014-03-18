@@ -1,55 +1,53 @@
-define(function(require, exports, module){
+var _ = require('underscore'),
+	Dispatcher = require('dispatcher');
 
-	var Dispatcher = require('dispatcher');
+var Controller = {
 
-	var Controller = {
+	aborted: false,
 
-		aborted: false,
+	abort: function() {
+		this.aborted = true;
+	},
 
-		abort: function() {
-			this.aborted = true;
-		},
+	execute: function(method, args, special) {
 
-		execute: function(method, args, special) {
-
-			if(special !== null) {
-				if(special) {
-					this.beforeSpecial();
-				} else {
-					this.before();
-				}
+		if(special !== null) {
+			if(special) {
+				this.beforeSpecial();
+			} else {
+				this.before();
 			}
-
-			if(!this.aborted) {
-				this[method].apply(this, args);
-			}
-
-			if(special !== null && !this.aborted) {
-				if(special) {
-					this.afterSpecial();
-				} else {
-					this.after();
-				}
-			}
-		},
-
-		before: function() {},
-
-		beforeSpecial: function() {},
-
-		after: function() {},
-
-		afterSpecial: function() {},
-
-		renderView: function(region, view, options) {
-			var viewPath = 'views/' + view;
-			Dispatcher.renderView(region, viewPath, options);
 		}
-	};
 
-	module.exports = {
-		extend: function() {
-			return _.extend(Controller, arguments[0]);
+		if(!this.aborted) {
+			this[method].apply(this, args);
 		}
-	};
-});
+
+		if(special !== null && !this.aborted) {
+			if(special) {
+				this.afterSpecial();
+			} else {
+				this.after();
+			}
+		}
+	},
+
+	before: function() {},
+
+	beforeSpecial: function() {},
+
+	after: function() {},
+
+	afterSpecial: function() {},
+
+	renderView: function(region, view, options) {
+		var viewPath = 'views/' + view;
+		Dispatcher.renderView(region, viewPath, options);
+	}
+};
+
+module.exports = {
+	extend: function() {
+		return _.extend(Controller, arguments[0]);
+	}
+};

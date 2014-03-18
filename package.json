@@ -15,7 +15,7 @@
 			"marionette"          : "marionettejs/backbone.marionette#lib/core/amd/backbone.marionette.js",
 			"bootstrap"           : "components/bootstrap#js/bootstrap.js",
 			"require"             : "jrburke/requirejs",
-			"handlebars.runtime"  : "components/handlebars.js#handlebars.runtime.amd.js"
+			"handlebars.runtime"  : "github:components/handlebars.js#handlebars.runtime.js"
 		}
 	},
 	"devDependencies": {
@@ -24,12 +24,13 @@
 		"grunt-contrib-handlebars" : "*",
 		"grunt-contrib-connect"    : "*",
 		"grunt-contrib-jshint"     : "*",
-		"grunt-contrib-requirejs"  : "*",
 		"grunt-replace"            : "*",
-		"grunt-contrib-clean"      : "*",
 		"grunt-processhtml"        : "*",
 		"jit-grunt"                : "*",
-		"underscore"               : "*"
+		"grunt-contrib-cssmin"     : "*",
+		"grunt-contrib-uglify"     : "*",
+		"grunt-browserify"         : "~2.0.0",
+		"grunt-contrib-copy"       : "*"
 	},
 	"scripts": {
 		"preinstall": "npm install -g grunt-cli volo"

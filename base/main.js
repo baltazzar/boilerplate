@@ -1,13 +1,12 @@
-require(['libs']);
+var Initializer = require('initializer'),
+	Dispatcher = require('dispatcher'),
+	Application = require('application');
 
-require(['initializer', 'application', 'dispatcher'], function(Initializer, Application, Dispatcher) {
+// Executa as rotinas contidas no arquivo application/initializer.js
+Initializer();
 
-	// Executa as rotinas contidas no arquivo application/initializer.js
-	Initializer();
+// Registra as rotas da aplicação
+Dispatcher.registerRoutes();
 
-	// Registra as rotas da aplicação
-	Dispatcher.registerRoutes();
-
-	// Inicia a aplicação
-	Application.start();
-});
+// Inicia a aplicação
+Application.start();

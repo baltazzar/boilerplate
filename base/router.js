@@ -1,26 +1,22 @@
-define(function(require, exports, module){
+var Backbone = require('backbone'),
+	_ = require('underscore');
 
-	var Backbone = require('backbone');
+module.exports = Backbone.Router.extend({
 
-	module.exports = Backbone.Router.extend({
+	initialize: function(routes) {
+		var router = this;
 
-		initialize: function(routes) {
-			var router = this;
+		_.each(routes, function(r) {
+			var route = r.route,
+				controller = require('controllers/' + r.controller),
+				method = r.method,
+				special = r.special;
 
-			_.each(routes, function(r) {
-				var route = r.route,
-					controllerPath = 'controllers/' + r.controller,
-					method = r.method,
-					special = r.special;
+			router.route(route, function() {
+				var args = _.initial(arguments);
 
-				router.route(route, function() {
-					var args = _.initial(arguments);
-
-					require([controllerPath], function(Controller) {
-						Controller.execute(method, args, special);
-					});
-				});
+				controller.execute(method, args, special);
 			});
-		}
-	});
+		});
+	}
 });

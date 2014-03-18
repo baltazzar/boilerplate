@@ -1,28 +1,19 @@
-define(function(require, exports, module){
+// Realiza um request para pegar as configurações do arquivo config.json
+// e exporta como um módulo para ser consumido pela aplicação.
+module.exports = (function() {
 
-	module.exports = {
+	var $ = require('jquery'),
+		configJson = null;
 
-		/**
-		 * Rotas da Aplicação
-		 *
-		 * As rotas com '@' são consideradas rotas especiais. Os filtros 'beforeSpecial' e 'afterSpecial'
-		 * são executados antes e depois da execução dessas rotas caso estejam definidos no controller.
-		 * Para as demais rotas os filtros 'before' e 'after' são executados caso estejam
-		 * definidos no controller.
-		 */
-		routes: {
-			'*404' : 'application#pagina404',
-			''     : 'application#home'
-		},
+	$.ajax({
+		url: 'config.json',
+		dataType: 'json',
+		cache: false,
+		async: false,
+		success: function(response) {
+			configJson = response;
+		}
+	});
 
-		/**
-		 * Regiões da Aplicação
-		 */
-		regions: {
-			menu : '#menu',
-			main : '#main'
-		},
-
-		CDN_URL: 'http://servicos.sorocaba.sp.gov.br/cdn'
-	};
-});
+	return configJson;
+})();

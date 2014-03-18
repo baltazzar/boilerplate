@@ -1,9 +1,6 @@
-define(function(require, exports, module){
+var Handlebars = require('handlebars'),
+	Config = require('config');
 
-	var Handlebars = require('handlebars.runtime')['default'],
-		Config = require('config');
-
-	Handlebars.registerHelper('CDN_URL', function() {
-		return Config.CDN_URL;
-	});
+Handlebars.registerHelper('CDN_URL', function() {
+	return Config.CDN_URL;
 });

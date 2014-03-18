@@ -17,3 +17,5 @@ libs
 fonts
 css/bootstrap.css
 application/templates/templates.js
+application.js
+libs.js

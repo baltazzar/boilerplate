@@ -1,22 +1,27 @@
-define(function(require, exports, module){
+var $ = require('jquery'),
+	Marionette = require('marionette'),
+	Backbone = require('backbone'),
+	Handlebars = require('handlebars'),
+	Templates = require('templates')(Handlebars),
+	Config = require('config'),
+	Handlebars_Helpers = require('handlebars_helpers'),
+	Application;
 
-	var Marionette = require('marionette'),
-		Handlebars = require('handlebars.runtime')['default'],
-		Templates = require('templates')(Handlebars),
-		Config = require('config'),
-		Handlebars_Helpers = require('handlebars_helpers'),
-		Application = new Marionette.Application();
+// Injeta o jquery
+Backbone.$ = $;
+Marionette.$ = $;
 
-	Marionette.Renderer.render = function(template, data) {
-		if(template) {
-			return Templates[template](data);
-		}
-	};
+Application = new Marionette.Application();
 
-	Application.addRegions(Config.regions);
+Marionette.Renderer.render = function(template, data) {
+	if(template) {
+		return Templates[template](data);
+	}
+};
 
-	// Código a ser executado na inicialização da aplicação.
-	Application.addInitializer(function() {});
+Application.addRegions(Config.regions);
 
-	module.exports = Application;
-});
+// Código a ser executado na inicialização da aplicação.
+Application.addInitializer(function() {});
+
+module.exports = Application;

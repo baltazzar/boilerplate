@@ -33,10 +33,14 @@ module.exports = function(grunt) {
 			},
 			templates: {
 				files: ['application/templates/**/*.tpl'],
-				tasks: ['handlebars']
+				tasks: ['handlebars', 'browserify:templates'],
+				options: {
+					livereload: '<%= livereloadPort %>',
+					interval: 200
+				}
 			},
 			application: {
-				files: ['application/**/*.js'],
+				files: ['application/**/*.js', '!application/templates/templates.js'],
 				tasks: ['browserify:application'],
 			},
 			static: {
@@ -86,6 +90,19 @@ module.exports = function(grunt) {
 					])
 				}
 			},
+			templates: {
+				src: [],
+				dest: 'templates.js',
+				options: {
+					alias: createAliases([
+						{
+							cwd: 'application/templates',
+							src: ['templates.js'],
+							dest: ''
+						}
+					])
+				}
+			},
 			application: {
 				src: ['base/main.js'],
 				dest: 'application.js',
@@ -94,6 +111,11 @@ module.exports = function(grunt) {
 						{
 							cwd: 'libs',
 							src: ['**/*.js'],
+							dest: ''
+						},
+						{
+							cwd: 'application/templates',
+							src: ['templates.js'],
 							dest: ''
 						},
 						{
@@ -114,12 +136,7 @@ module.exports = function(grunt) {
 						},
 						{
 							cwd: 'application',
-							src: ['**/*.js'],
-							dest: ''
-						},
-						{
-							cwd: 'application/templates',
-							src: ['templates.js'],
+							src: ['controllers/**/*.js', 'collections/**/*.js', 'models/**/*.js', 'views/**/*.js', '*.js'],
 							dest: ''
 						}
 					])
@@ -133,12 +150,20 @@ module.exports = function(grunt) {
 			}
 		},
 		uglify: {
-			'dist/<%= pkg.version %>/application.min.js': ['libs.js', 'application.js']
+			'dist/<%= pkg.version %>/application.min.js': ['libs.js', 'templates.js', 'application.js']
 		},
 		copy: {
 			dist: {
-				'dist/<%= pkg.version %>/index.html': ['index.html'],
-				'dist/<%= pkg.version %>/config.json': ['config.json']
+				files: [
+					{
+						src: 'index.html',
+						dest: 'dist/<%= pkg.version %>/index.html'
+					},
+					{
+						src: 'config.json',
+						dest: 'dist/<%= pkg.version %>/config.json'
+					}
+				]
 			}
 			// deploy: {
 			// 	expand: true,

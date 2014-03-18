@@ -35,7 +35,6 @@ Esse comando instalará o Boilerplate juntamente com as bibliotecas necessárias
 ├── base
 |	├── baseController.js
 |	├── dispatcher.js
-|	├── infra.js
 |	├── main.js
 |	└── router.js
 ├── css

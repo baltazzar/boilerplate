@@ -1,4 +1,4 @@
-var Handlebars = require('handlebars'),
+var Handlebars = require('handlebars/runtime')['default'],
 	Config = require('config');
 
 Handlebars.registerHelper('CDN_URL', function() {

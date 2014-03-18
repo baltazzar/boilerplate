@@ -74,8 +74,9 @@ module.exports = function(grunt) {
 		browserify: {
 			libs: {
 				src: [],
-				dest: './libs.js',
+				dest: 'libs.js',
 				options: {
+					require: ['handlebars/runtime'],
 					alias: createAliases([
 						{
 							cwd: 'libs',
@@ -89,12 +90,19 @@ module.exports = function(grunt) {
 				src: ['base/main.js'],
 				dest: 'application.js',
 				options: {
-					alias: createAliases([
+					external: createAliases([
 						{
 							cwd: 'libs',
 							src: ['**/*.js'],
 							dest: ''
 						},
+						{
+							cwd: 'node_modules/handlebars/dist/cjs',
+							src: ['**/*.js'],
+							dest: ''
+						}
+					]),
+					alias: createAliases([
 						{
 							src: ['config.js'],
 							dest: ''

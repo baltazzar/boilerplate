@@ -13,9 +13,7 @@
 			"backbone.babysitter" : "marionettejs/backbone.babysitter",
 			"backbone.wreqr"      : "marionettejs/backbone.wreqr",
 			"marionette"          : "marionettejs/backbone.marionette#lib/core/amd/backbone.marionette.js",
-			"bootstrap"           : "components/bootstrap#js/bootstrap.js",
-			"require"             : "jrburke/requirejs",
-			"handlebars.runtime"  : "github:components/handlebars.js#handlebars.runtime.js"
+			"bootstrap"           : "components/bootstrap#js/bootstrap.js"
 		}
 	},
 	"devDependencies": {

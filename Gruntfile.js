@@ -164,14 +164,14 @@ module.exports = function(grunt) {
 						dest: 'dist/<%= pkg.version %>/config.json'
 					}
 				]
+			},
+			deploy: {
+				expand: true,
+				cwd: 'dist/<%= pkg.version %>',
+				src: '**',
+				dest: '//pms-teweb02/sistemas/<%= pkg.name %>',
+				flatten: true
 			}
-			// deploy: {
-			// 	expand: true,
-			// 	cwd: 'dist/<%= pkg.version %>',
-			// 	src: '**',
-			// 	dest: '//pms-teweb02/sistemas/TESTE/',
-			// 	flatten: true
-			// }
 		},
 		replace: {
 			dist: {
@@ -210,8 +210,16 @@ module.exports = function(grunt) {
 		}
 	});
 
-	grunt.registerTask('dev', ['connect', 'watch']);
 	grunt.registerTask('default', ['handlebars', 'browserify', 'connect', 'watch']);
+	grunt.registerTask('dev', ['default']);
 	grunt.registerTask('build', ['jshint', 'browserify', 'uglify', 'cssmin', 'copy:dist', 'replace', 'processhtml']);
-	// grunt.registerTask('deploy', ['copy:deploy']);
+	grunt.registerTask('deploy-message', function() {
+		var appName = grunt.file.readJSON('package.json')['name'];
+
+		grunt.log.writeln('###########################################################################');
+		grunt.log.writeln('# Deploy realizado com sucesso!                                           #');
+		grunt.log.writeln('# Aplicação disponível no endereço http://pms-teweb02/' + appName + '        #');
+		grunt.log.writeln('###########################################################################');
+	});
+	grunt.registerTask('deploy', ['copy:deploy', 'deploy-message']);
 };

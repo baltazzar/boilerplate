@@ -11,6 +11,8 @@ module.exports = BaseController.extend({
 	},
 
 	pagina404: function() {
-		console.log('404');
+		// view menu renderizada explicitamente pois rotas 404 não executam filtros!
+		this.renderView('menu', 'menu');
+		this.renderView('main', 'pagina404');
 	}
 });

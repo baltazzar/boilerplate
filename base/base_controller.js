@@ -1,15 +1,14 @@
-var _ = require('underscore'),
-	Dispatcher = require('dispatcher');
+var Dispatcher = require('dispatcher');
 
-var Controller = {
+var Controller = function(options){
 
-	aborted: false,
+	this.aborted = false;
 
-	abort: function() {
+	this.abort = function() {
 		this.aborted = true;
-	},
+	};
 
-	execute: function(method, args, special) {
+	this.execute = function(method, args, special) {
 
 		if(special !== null) {
 			if(special) {
@@ -20,7 +19,7 @@ var Controller = {
 		}
 
 		if(!this.aborted) {
-			this[method].apply(this, args);
+			options[method].apply(this, args);
 		}
 
 		if(special !== null && !this.aborted) {
@@ -30,24 +29,24 @@ var Controller = {
 				this.after();
 			}
 		}
-	},
+	};
 
-	before: function() {},
+	this.before = options.before ? options.before : function() {};
 
-	beforeSpecial: function() {},
+	this.beforeSpecial = options.beforeSpecial ? options.beforeSpecial : function() {};
 
-	after: function() {},
+	this.after = options.after ? options.after : function() {};
 
-	afterSpecial: function() {},
+	this.afterSpecial = options.afterSpecial ? options.afterSpecial : function() {};
 
-	renderView: function(region, view, options) {
+	this.renderView = function(region, view, options) {
 		var viewPath = 'views/' + view;
 		Dispatcher.renderView(region, viewPath, options);
-	}
+	};
 };
 
 module.exports = {
 	extend: function() {
-		return _.extend(Controller, arguments[0]);
+		return new Controller(arguments[0]);
 	}
 };

@@ -1,7 +1,7 @@
 var $ = require('jquery'),
 	Marionette = require('marionette'),
 	Backbone = require('backbone'),
-	Handlebars = require('handlebars/runtime')['default'],
+	Handlebars = require('handlebars.runtime')['default'],
 	Templates = require('templates')(Handlebars),
 	Config = require('config'),
 	Handlebars_Helpers = require('handlebars_helpers'),

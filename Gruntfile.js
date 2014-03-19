@@ -35,13 +35,12 @@ module.exports = function(grunt) {
 				files: ['application/templates/**/*.tpl'],
 				tasks: ['handlebars', 'browserify:templates'],
 				options: {
-					livereload: '<%= livereloadPort %>',
-					interval: 200
+					livereload: '<%= livereloadPort %>'
 				}
 			},
 			application: {
 				files: ['application/**/*.js', '!application/templates/templates.js'],
-				tasks: ['browserify:application'],
+				tasks: ['browserify:application']
 			},
 			static: {
 				files: ['index.html', 'css/**/*.css', 'config.json'],
@@ -80,11 +79,15 @@ module.exports = function(grunt) {
 				src: [],
 				dest: 'libs.js',
 				options: {
-					require: ['handlebars/runtime'],
 					alias: createAliases([
 						{
 							cwd: 'libs',
 							src: ['**/*.js'],
+							dest: ''
+						},
+						{
+							cwd: './node_modules/grunt-contrib-handlebars/node_modules/handlebars/dist/cjs',
+							src: ['handlebars.runtime.js'],
 							dest: ''
 						}
 					])
@@ -114,13 +117,13 @@ module.exports = function(grunt) {
 							dest: ''
 						},
 						{
-							cwd: 'application/templates',
-							src: ['templates.js'],
+							cwd: './node_modules/grunt-contrib-handlebars/node_modules/handlebars/dist/cjs',
+							src: ['handlebars.runtime.js'],
 							dest: ''
 						},
 						{
-							cwd: 'node_modules/handlebars/dist/cjs',
-							src: ['**/*.js'],
+							cwd: 'application/templates',
+							src: ['templates.js'],
 							dest: ''
 						}
 					]),
@@ -213,7 +216,7 @@ module.exports = function(grunt) {
 				'-W044' : true,
 				'-W099' : true
 			},
-			files: ['application/**/*.js', '!application/templates/templates.js']
+			files: ['*.js', 'base/**/*.js', 'application/**/*.js', '!application/templates/templates.js']
 		}
 	});
 

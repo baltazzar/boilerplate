@@ -3,5 +3,4 @@
 		<img src="{{CDN_URL}}/brasao_sorocaba.png" class="logotipo-prefeitura pull-left">
 		<span class="navbar-brand">SIGLA DA APP</span>
 	</a>
-	<strong class="text-muted">app/templates/menu.tpl</strong>
 </div>

@@ -219,7 +219,7 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('default', ['handlebars', 'browserify', 'connect', 'watch']);
 	grunt.registerTask('dev', ['default']);
-	grunt.registerTask('build', ['jshint', 'browserify', 'uglify', 'cssmin', 'copy:dist', 'replace', 'processhtml']);
+	grunt.registerTask('build', ['jshint', 'handlebars', 'browserify', 'uglify', 'cssmin', 'copy:dist', 'replace', 'processhtml']);
 	grunt.registerTask('deploy-message', function() {
 		var appName = grunt.file.readJSON('package.json')['name'];
 

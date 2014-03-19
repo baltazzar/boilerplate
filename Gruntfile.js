@@ -144,13 +144,13 @@ module.exports = function(grunt) {
 			}
 		},
 		cssmin: {
-			'dist/<%= pkg.version %>/application.min.css': ['css/**/*.css', '!main.css'],
+			'dist/<%= pkg.version %>/css/application.min.css': ['css/**/*.css', '!main.css'],
 			options: {
 				keepSpecialComments: 0
 			}
 		},
 		uglify: {
-			'dist/<%= pkg.version %>/application.min.js': ['libs.js', 'templates.js', 'application.js']
+			'dist/<%= pkg.version %>/js/application.min.js': ['libs.js', 'templates.js', 'application.js']
 		},
 		copy: {
 			dist: {
@@ -162,6 +162,13 @@ module.exports = function(grunt) {
 					{
 						src: 'config.json',
 						dest: 'dist/<%= pkg.version %>/config.json'
+					},
+					{
+						expand: true,
+						cwd: 'fonts',
+						src: '**',
+						dest: 'dist/<%= pkg.version %>/fonts',
+						flatten: false
 					}
 				]
 			},
@@ -170,7 +177,7 @@ module.exports = function(grunt) {
 				cwd: 'dist/<%= pkg.version %>',
 				src: '**',
 				dest: '//pms-teweb02/sistemas/<%= pkg.name %>',
-				flatten: true
+				flatten: false
 			}
 		},
 		replace: {

@@ -39,9 +39,9 @@ var Controller = function(options){
 
 	this.afterSpecial = options.afterSpecial ? options.afterSpecial : function() {};
 
-	this.renderView = function(region, view, options) {
+	this.renderView = function(region, view, viewOptions) {
 		var viewPath = 'views/' + view;
-		Dispatcher.renderView(region, viewPath, options);
+		Dispatcher.renderView(region, viewPath, viewOptions);
 	};
 };
 

@@ -33,13 +33,14 @@ module.exports = function(grunt) {
 			},
 			templates: {
 				files: ['application/templates/**/*.tpl'],
-				tasks: ['handlebars', 'browserify:templates'],
-				options: {
-					livereload: '<%= livereloadPort %>'
-				}
+				tasks: ['handlebars']
+			},
+			compiledTemplates: {
+				files: ['templates.js'],
+				tasks: ['browserify:templates']
 			},
 			application: {
-				files: ['application/**/*.js', '!application/templates/templates.js'],
+				files: ['application/**/*.js'],
 				tasks: ['browserify:application']
 			},
 			static: {
@@ -49,7 +50,7 @@ module.exports = function(grunt) {
 				}
 			},
 			reload: {
-				files: ['application.js'],
+				files: ['application.js', 'libs.js', 'templates.js'],
 				options: {
 					livereload: '<%= livereloadPort %>',
 					interval: 700
@@ -58,8 +59,8 @@ module.exports = function(grunt) {
 		},
 		handlebars: {
 			compile: {
-				src: 'application/templates/**/*.tpl',
-				dest: 'application/templates/templates.js',
+				src: ['application/templates/**/*.tpl'],
+				dest: 'templates.js',
 				options: {
 					commonjs: true,
 					namespace: false,
@@ -99,7 +100,6 @@ module.exports = function(grunt) {
 				options: {
 					alias: createAliases([
 						{
-							cwd: 'application/templates',
 							src: ['templates.js'],
 							dest: ''
 						}
@@ -122,7 +122,6 @@ module.exports = function(grunt) {
 							dest: ''
 						},
 						{
-							cwd: 'application/templates',
 							src: ['templates.js'],
 							dest: ''
 						}
@@ -216,7 +215,7 @@ module.exports = function(grunt) {
 				'-W044' : true,
 				'-W099' : true
 			},
-			files: ['*.js', 'base/**/*.js', 'application/**/*.js', '!application/templates/templates.js']
+			files: ['config.js', 'base/**/*.js', 'application/**/*.js', '!application/templates/templates.js']
 		}
 	});
 
@@ -227,8 +226,8 @@ module.exports = function(grunt) {
 		var appName = grunt.file.readJSON('package.json')['name'];
 
 		grunt.log.writeln('###########################################################################');
-		grunt.log.writeln('# Deploy realizado com sucesso!                                           #');
-		grunt.log.writeln('# Aplicação disponível no endereço http://pms-teweb02/' + appName + '        #');
+		grunt.log.writeln(' Deploy realizado com sucesso!');
+		grunt.log.writeln(' Aplicação disponível no endereço http://pms-teweb02/' + appName);
 		grunt.log.writeln('###########################################################################');
 	});
 	grunt.registerTask('deploy', ['copy:deploy', 'deploy-message']);

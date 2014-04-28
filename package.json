@@ -5,7 +5,7 @@
 	"volo": {
 		"baseDir": "libs",
 		"dependencies": {
-			"../css/bootstrap"    : "components/bootstrap#css/bootstrap.css",
+			"../css/bootstrap"    : "https://raw.githubusercontent.com/components/bootstrap/master/css/bootstrap.css",
 			"../fonts"            : "components/bootstrap#fonts",
 			"jquery"              : "components/jquery/~1",
 			"underscore"          : "jashkenas/underscore",

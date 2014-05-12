@@ -15,9 +15,8 @@ npm-debug.log
 node_modules
 libs
 fonts
+dist
 css/bootstrap.css
-application/templates/templates.js
-./application.js
+application.js
 libs.js
-dist/
 templates.js

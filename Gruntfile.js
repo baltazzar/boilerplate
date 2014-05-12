@@ -146,7 +146,7 @@ module.exports = function(grunt) {
 			}
 		},
 		cssmin: {
-			'dist/<%= pkg.version %>/css/application.min.css': ['css/**/*.css', '!main.css'],
+			'dist/<%= pkg.version %>/css/application.min.css': ['main.css'],
 			options: {
 				keepSpecialComments: 0
 			}

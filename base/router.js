@@ -1,5 +1,6 @@
 var Backbone = require('backbone'),
-	_ = require('underscore');
+	_ = require('underscore'),
+	Config = require('config');
 
 module.exports = Backbone.Router.extend({
 
@@ -14,6 +15,10 @@ module.exports = Backbone.Router.extend({
 
 			router.route(route, function() {
 				var args = _.initial(arguments);
+
+				if(!_.contains(Config.BLACKLIST_ROUTES, route)) {
+					window.lastRoute = Backbone.history.fragment;
+				}
 
 				controller.execute(method, args, special);
 			});

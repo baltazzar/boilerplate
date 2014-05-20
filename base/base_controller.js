@@ -1,6 +1,9 @@
-var Dispatcher = require('dispatcher');
+var Dispatcher = require('dispatcher'),
+	_ = require('underscore'),
 
 var Controller = function(options){
+
+	_.extend(this, options);
 
 	this.aborted = false;
 

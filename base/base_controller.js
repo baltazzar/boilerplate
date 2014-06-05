@@ -1,5 +1,5 @@
 var Dispatcher = require('dispatcher'),
-	_ = require('underscore'),
+	_ = require('underscore');
 
 var Controller = function(options){
 

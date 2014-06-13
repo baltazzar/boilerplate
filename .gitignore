@@ -17,6 +17,4 @@ libs
 fonts
 dist
 css/bootstrap.css
-application.js
-libs.js
-templates.js
+temp

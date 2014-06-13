@@ -1,37 +1,41 @@
 {
-	"name": "SIGLA_DA_APP",
-	"version": "0.0.1",
-	"private": true,
-	"volo": {
-		"baseDir": "libs",
-		"dependencies": {
-			"../css/bootstrap"    : "https://raw.githubusercontent.com/components/bootstrap/master/css/bootstrap.css",
-			"../fonts"            : "components/bootstrap#fonts",
-			"jquery"              : "components/jquery/~1",
-			"underscore"          : "jashkenas/underscore",
-			"backbone"            : "jashkenas/backbone",
-			"backbone.babysitter" : "marionettejs/backbone.babysitter",
-			"backbone.wreqr"      : "marionettejs/backbone.wreqr",
-			"marionette"          : "marionettejs/backbone.marionette#lib/core/amd/backbone.marionette.js",
-			"bootstrap"           : "components/bootstrap#js/bootstrap.js"
-		}
-	},
-	"devDependencies": {
-		"grunt"                    : "~0.4.4",
-		"grunt-contrib-clean"      : "~0.5.0",
-		"grunt-contrib-connect"    : "~0.7.1",
-		"grunt-contrib-copy"       : "~0.5.0",
-		"grunt-contrib-cssmin"     : "~0.9.0",
-		"grunt-contrib-handlebars" : "~0.7.0",
-		"grunt-contrib-jshint"     : "~0.9.2",
-		"grunt-contrib-watch"      : "~0.6.1",
-		"grunt-contrib-uglify"     : "~0.4.0",
-		"grunt-browserify"         : "~2.0.1",
-		"grunt-processhtml"        : "~0.3.0",
-		"grunt-replace"            : "~0.7.3",
-		"jit-grunt"                : "~0.3.2"
-	},
-	"scripts": {
-		"preinstall": "npm install -g grunt-cli volo"
-	}
+  "name": "SIGLA_DA_APP",
+  "version": "0.0.1",
+  "private": true,
+  "volo": {
+    "baseDir": "libs",
+    "dependencies": {
+      "../css/bootstrap": "https://raw.githubusercontent.com/components/bootstrap/master/css/bootstrap.css",
+      "../fonts": "github:components/bootstrap/3.1.1#fonts",
+      "jquery": "github:components/jquery/1.11.0",
+      "underscore": "github:jashkenas/underscore/1.6.0",
+      "backbone": "github:jashkenas/backbone/1.1.2",
+      "backbone.babysitter": "github:marionettejs/backbone.babysitter/v0.1.4",
+      "backbone.wreqr": "github:marionettejs/backbone.wreqr/v1.3.1",
+      "marionette": "github:marionettejs/backbone.marionette/v1.8.7#lib/core/amd/backbone.marionette.js",
+      "bootstrap": "github:components/bootstrap/3.1.1#js/bootstrap.js"
+    }
+  },
+  "scripts": {
+    "preinstall": "npm install -g gulp volo"
+  },
+  "devDependencies": {
+    "gulp-define-module": "^0.1.1",
+    "gulp-handlebars": "^2.1.0",
+    "gulp-watch": "^0.6.6",
+    "gulp": "^3.8.0",
+    "watchify": "^0.10.2",
+    "gulp-plumber": "^0.6.3",
+    "gulp-wrap": "^0.3.0",
+    "gulp-changed": "^0.4.0",
+    "gulp-util": "^2.2.17",
+    "gulp-concat": "^2.2.0",
+    "glob": "^4.0.2",
+    "vinyl-source-stream": "^0.1.1",
+    "connect": "^2.19.6",
+    "connect-livereload": "^0.4.0",
+    "open": "0.0.5",
+    "express": "^4.4.3",
+    "gulp-livereload": "^2.1.0"
+  }
 }

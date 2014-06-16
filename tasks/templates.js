@@ -14,7 +14,8 @@ gulp.task('templates', function() {
 		.pipe(defineModule('plain', {
 			wrapper: '<%= content %>',
 			context: function(context) {
-				var filename = context.file.path.split('templates' + path.sep)[1].replace('.js', '.tpl'),
+				var filepath = context.file.path.split('templates' + path.sep)[1].replace('.js', '.tpl'),
+					filename = filepath.replace(new RegExp('\\' + path.sep, 'g'), '/'),
 					content = 'templates["' + filename + '"] = ' + context.handlebars;
 
 				if(filename.split('/').pop().charAt(0) === '_') {

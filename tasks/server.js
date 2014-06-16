@@ -12,5 +12,7 @@ gulp.task('server', function() {
 	server.use(connect.static(process.cwd()));
 	server.listen(SERVER_PORT);
 
-	open('http://localhost:' + SERVER_PORT);
+	setTimeout(function() {
+		open('http://localhost:' + SERVER_PORT);
+	}, 3000);
 });

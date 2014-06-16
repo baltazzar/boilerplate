@@ -1,6 +1,5 @@
 var gulp = require('gulp'),
 	gutil = require('gulp-util'),
-	changed = require('gulp-changed'),
 	plumber = require('gulp-plumber'),
 	handlebars = require('gulp-handlebars'),
 	defineModule = require('gulp-define-module'),
@@ -11,7 +10,6 @@ var gulp = require('gulp'),
 gulp.task('templates', function() {
 	return gulp.src('application/templates/**/*.tpl')
 		.pipe(plumber({errorHandler: gutil.log}))
-		.pipe(changed('temp', {extension: '.js'}))
 		.pipe(handlebars())
 		.pipe(defineModule('plain', {
 			wrapper: '<%= content %>',

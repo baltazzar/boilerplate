@@ -4,7 +4,6 @@ var gulp = require('gulp'),
 	plumber = require('gulp-plumber'),
 	tap = require('gulp-tap'),
 	rename = require('gulp-rename'),
-	source = require('vinyl-source-stream'),
 	glob = require('glob'),
 	browserify = require('browserify');
 
@@ -27,7 +26,7 @@ gulp.task('browserify:libs', function() {
 		.pipe(livereload());
 });
 
-gulp.task('browserify:templates', function() {
+gulp.task('browserify:templates', ['templates'], function() {
 	gulp.src('./temp/templates_compilados.js', {read: false})
 		.pipe(plumber(gutil.log))
 		.pipe(tap(function(file) {

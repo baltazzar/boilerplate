@@ -1,55 +1,42 @@
 var Dispatcher = require('dispatcher'),
 	_ = require('underscore');
 
-var Controller = function(options){
-
-	_.extend(this, options);
-
-	this.aborted = false;
-
-	this.abort = function() {
-		this.aborted = true;
-	};
-
-	this.execute = function(method, args, special) {
+module.exports = {
+	before: function() {},
+	beforeSpecial: function() {},
+	afterSpecial: function() {},
+	after: function() {},
+	_aborted: false,
+	abort: function() {
+		this._aborted = true;
+	},
+	execute: function(method, args, special) {
 
 		if(special !== null) {
 			if(special) {
-				this.beforeSpecial();
+				this.beforeSpecial(method, location.hash);
 			} else {
-				this.before();
+				this.before(method, location.hash);
 			}
 		}
 
-		if(!this.aborted) {
-			options[method].apply(this, args);
-		}
-
-		if(special !== null && !this.aborted) {
-			if(special) {
-				this.afterSpecial();
-			} else {
-				this.after();
+		if(!this._aborted) {
+			this[method].apply(this, args);
+			if(special !== null) {
+				if(special) {
+					this.afterSpecial(method, location.hash);
+				} else {
+					this.after(method, location.hash);
+				}
 			}
 		}
-	};
-
-	this.before = options.before ? options.before : function() {};
-
-	this.beforeSpecial = options.beforeSpecial ? options.beforeSpecial : function() {};
-
-	this.after = options.after ? options.after : function() {};
-
-	this.afterSpecial = options.afterSpecial ? options.afterSpecial : function() {};
-
-	this.renderView = function(region, view, viewOptions) {
+	},
+	renderView: function(region, view, viewOptions) {
 		var viewPath = 'views/' + view;
 		Dispatcher.renderView(region, viewPath, viewOptions);
-	};
-};
-
-module.exports = {
-	extend: function() {
-		return new Controller(arguments[0]);
+	},
+	extend: function(options) {
+		var attrs = _.extend({}, this, options);
+		return attrs;
 	}
 };

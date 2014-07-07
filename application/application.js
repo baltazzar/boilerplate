@@ -1,17 +1,9 @@
-var $ = require('jquery'),
-	Marionette = require('marionette'),
-	Backbone = require('backbone'),
+var Marionette = require('marionette'),
 	Handlebars = require('handlebars.runtime')['default'],
 	Templates = require('templates')(Handlebars),
 	Config = require('config'),
 	Handlebars_Helpers = require('handlebars_helpers'),
-	Application;
-
-// Injeta o jquery
-Backbone.$ = $;
-Marionette.$ = $;
-
-Application = new Marionette.Application();
+	Application = new Marionette.Application();
 
 Marionette.Renderer.render = function(template, data) {
 	if(template) {

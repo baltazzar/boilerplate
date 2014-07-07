@@ -5,15 +5,13 @@
 	"volo": {
 		"baseDir": "libs",
 		"dependencies": {
-			"../css/bootstrap"    : "https://raw.githubusercontent.com/components/bootstrap/master/css/bootstrap.css",
-			"../fonts"            : "github:components/bootstrap/3.1.1#fonts",
-			"jquery"              : "github:components/jquery/1.11.0",
-			"underscore"          : "github:jashkenas/underscore/1.6.0",
-			"backbone"            : "github:jashkenas/backbone/1.1.2",
-			"backbone.babysitter" : "github:marionettejs/backbone.babysitter/v0.1.4",
-			"backbone.wreqr"      : "github:marionettejs/backbone.wreqr/v1.3.1",
-			"marionette"          : "github:marionettejs/backbone.marionette/v1.8.7#lib/core/amd/backbone.marionette.js",
-			"bootstrap"           : "github:components/bootstrap/3.1.1#js/bootstrap.js"
+			"../css/bootstrap" : "github:components/bootstrap/~3#css/bootstrap.css",
+			"../fonts"         : "github:components/bootstrap/~3#fonts",
+			"jquery"           : "github:components/jquery/~1",
+			"underscore"       : "github:jashkenas/underscore/~1",
+			"backbone"         : "github:jashkenas/backbone/~1",
+			"marionette"       : "github:marionettejs/backbone.marionette/~v2#lib/backbone.marionette.js",
+			"bootstrap"        : "github:components/bootstrap/~3#js/bootstrap.js"
 		}
 	},
 	"scripts": {

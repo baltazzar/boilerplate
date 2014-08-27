@@ -1,2 +1,6 @@
 @import url('bootstrap.css');
 @import url('boilerplate.css');
+
+a.active {
+	color: #ffffff !important;
+}

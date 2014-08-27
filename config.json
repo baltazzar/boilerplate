@@ -9,5 +9,6 @@
 		"main" : "#main"
 	},
 
+	"CACHE_CLEAR_INTERVAL": 5000,
 	"CDN_URL": "http://servicos.sorocaba.sp.gov.br/cdn"
 }

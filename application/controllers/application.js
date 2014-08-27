@@ -1,7 +1,6 @@
-var BaseController = require('base_controller');
+var Boiler = require('boiler');
 
-module.exports = BaseController.extend({
-
+module.exports = Boiler.Controller.extend({
 	before: function() {
 		this.renderView('menu', 'menu');
 	},

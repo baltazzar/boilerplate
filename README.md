@@ -31,19 +31,15 @@ Esse comando instalará o Boilerplate juntamente com as bibliotecas necessárias
 |	├── templates
 |	├── views
 |	├── application.js
+|	├── boiler.js
+|	├── handlebars_helpers.js
 |	└── initializer.js
-├── base
-|	├── baseController.js
-|	├── dispatcher.js
-|	├── main.js
-|	└── router.js
 ├── css
 |	├── boilerplate.css
 |	└── main.css
-├── fonts
-├── libs
 ├── config.js
-├── Gruntfile.js
+├── config.json
+├── gulpfile.js
 ├── index.html
 └── package.json
 ```

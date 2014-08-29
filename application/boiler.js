@@ -27,8 +27,15 @@ var registerRoutes = function(config) {
 // Set the Loading and Error Templates
 var setLoadingAndErrorTemplates = function() {
 	if(Templates['loading.tpl']) {
+		var loading;
 		$(document).ajaxStart(function() {
-			Boiler.Application.main.show(new Marionette.ItemView({template: 'loading.tpl'}));
+			loading = setTimeout(function() {
+				Boiler.Application.main.show(new Marionette.ItemView({template: 'loading.tpl'}));
+			}, 1000);
+		});
+
+		$(document).ajaxComplete(function() {
+			clearTimeout(loading);
 		});
 	}
 
@@ -74,7 +81,7 @@ var setStoreCleanInterval = function() {
 		interval = setInterval(function() {
 			Boiler.models = {};
 			Boiler.collections = {};
-		}, Boiler.Config.CACHE_CLEAR_INTERVAL || 60000);
+		}, Boiler.Config.CACHE_CLEAR_INTERVAL || 3600000);
 	}
 };
 
@@ -132,5 +139,19 @@ Boiler.Controller = {
 		return _.extend({store: store.call(Boiler)}, this, options);
 	}
 };
+
+// Boiler Pageable Collection
+Boiler.PageableCollection = Backbone.Collection.extend({
+	parse: function(res) {
+		if(res.data) {
+			this.currentPage = res.data.currentPage;
+			this.pageCount = res.data.pageCount;
+			this.itemCount = res.data.itemCount;
+			this.itemOffset = res.data.itemOffset;
+
+			return res.data.itemList;
+		}
+	}
+});
 
 module.exports = Boiler;

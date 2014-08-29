@@ -15,8 +15,9 @@ var Marionette = require('marionette'),
 	Boiler = require('boiler'),
 	Application = new Marionette.Application();
 
-Marionette.Renderer.render = function(template, data) {
+Marionette.Renderer.render = function(template, data, view) {
 	if(template) {
+		data.view = view;
 		return Templates[template](data);
 	}
 };

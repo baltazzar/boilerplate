@@ -22,7 +22,7 @@ Handlebars.registerHelper('link', function(route, param, options) {
 
 	hashRoute = route.split('?')[0];
 
-	link.attr('href', '#/' + route).addClass('active', hashRoute === fragment);
+	link.attr('href', '#/' + route).toggleClass('active', hashRoute === fragment);
 
 	return new Handlebars.SafeString(link[0].outerHTML);
 });

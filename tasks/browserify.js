@@ -33,13 +33,15 @@ gulp.task('browserify:templates', ['templates'], function() {
 
 			bundler.require(file.path, {expose: 'templates'});
 
+			bundler.external('handlebars.runtime');
+
 			file.contents = bundler.bundle({fast: true});
 		}))
 		.pipe(rename('templates.js'))
 		.pipe(gulp.dest('temp'));
 });
 
-gulp.task('browserify:application', function() {
+gulp.task('browserify:application', ['helpers'], function() {
 	gulp.src('./application/application.js', {read: false})
 		.pipe(plumber(gutil.log))
 		.pipe(tap(function(file) {

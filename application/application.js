@@ -1,7 +1,5 @@
 var Backbone = require('backbone'),
-	Handlebars = require('handlebars.runtime')['default'],
-	Templates = require('templates')(Handlebars),
-	Handlebars_Helpers = require('handlebars_helpers'),
+	Templates = require('templates'),
 	Initializer = require('initializer'),
 	Config = require('config');
 
@@ -10,6 +8,9 @@ jQuery = $ = require('jquery');
 
 // Injeta o jquery.
 Backbone.$ = $;
+
+// Registra os helpers do Handlebars
+require('handlebars_helpers');
 
 var Marionette = require('marionette'),
 	Boiler = require('boiler'),

@@ -1,8 +1,7 @@
 var _ = require('underscore'),
 	Backbone = require('backbone'),
 	Marionette = require('marionette'),
-	Handlebars = require('handlebars.runtime')['default'],
-	Templates = require('templates')(Handlebars),
+	Templates = require('templates'),
 	Boiler = {};
 
 // Register Routes

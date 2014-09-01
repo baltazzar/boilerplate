@@ -8,7 +8,7 @@ var gulp = require('gulp'),
 	path = require('path');
 
 gulp.task('templates', function() {
-	return gulp.src('application/templates/**/*.tpl')
+	gulp.src('application/templates/**/*.tpl')
 		.pipe(plumber({errorHandler: gutil.log}))
 		.pipe(handlebars())
 		.pipe(defineModule('plain', {
@@ -25,12 +25,6 @@ gulp.task('templates', function() {
 			}
 		}))
 		.pipe(concat('templates_compilados.js'))
-		.pipe(wrap('module.exports = function(Handlebars) {\nvar templates = {};\n<%= contents %>\nreturn templates;\n};', {
-			imports: {
-				getName: function(filename) {
-					return path.basename(filename, path.extname(filename));
-				}
-			}
-		}))
+		.pipe(wrap('var Handlebars = require("handlebars.runtime")["default"];\nvar templates = {};\n<%= contents %>\nmodule.exports = templates;'))
 		.pipe(gulp.dest('temp'));
 });

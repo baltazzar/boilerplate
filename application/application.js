@@ -17,7 +17,9 @@ var Marionette = require('marionette'),
 	Application = new Marionette.Application();
 
 Marionette.Renderer.render = function(template, data, view) {
-	if(template) {
+	if(typeof template === 'function') {
+		return template;
+	} else {
 		data.view = view;
 		return Templates[template](data);
 	}

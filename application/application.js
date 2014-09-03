@@ -1,10 +1,7 @@
-var Backbone = require('backbone'),
-	Templates = require('templates'),
-	Initializer = require('initializer'),
-	Config = require('config');
-
 // Exporta o jquery globalmente para compatibilidade com plugins.
 jQuery = $ = require('jquery');
+
+var Backbone = require('backbone');
 
 // Injeta o jquery.
 Backbone.$ = $;
@@ -13,7 +10,8 @@ Backbone.$ = $;
 require('handlebars_helpers');
 
 var Marionette = require('marionette'),
-	Boiler = require('boiler'),
+	Templates = require('templates'),
+	Config = require('config'),
 	Application = new Marionette.Application();
 
 Marionette.Renderer.render = function(template, data, view) {
@@ -26,12 +24,5 @@ Marionette.Renderer.render = function(template, data, view) {
 };
 
 Application.addRegions(Config.regions);
-
-Boiler.init(Config, Application);
-
-// Código a ser executado na inicialização da aplicação.
-Application.addInitializer(Initializer);
-
-Application.start();
 
 module.exports = Application;

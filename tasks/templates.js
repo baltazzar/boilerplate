@@ -10,7 +10,9 @@ var gulp = require('gulp'),
 gulp.task('templates', function() {
 	gulp.src('application/templates/**/*.tpl')
 		.pipe(plumber({errorHandler: gutil.log}))
-		.pipe(handlebars())
+		.pipe(handlebars({
+			handlebars: require('handlebars')
+		}))
 		.pipe(defineModule('plain', {
 			wrapper: '<%= content %>',
 			context: function(context) {

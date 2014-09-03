@@ -5,7 +5,8 @@ var gulp = require('gulp'),
 	tap = require('gulp-tap'),
 	rename = require('gulp-rename'),
 	glob = require('glob'),
-	browserify = require('browserify');
+	browserify = require('browserify'),
+	livereload = require('gulp-livereload');
 
 gulp.task('browserify:libs', function() {
 	gulp.src('./application/application.js', {read: false})
@@ -17,12 +18,14 @@ gulp.task('browserify:libs', function() {
 				bundler.require(file, {expose: file.split('./libs/')[1].replace('.js', '')});
 			});
 
-			bundler.require('./node_modules/gulp-handlebars/node_modules/handlebars/dist/cjs/handlebars.runtime.js', {expose: 'handlebars.runtime'});
+			bundler.require('./node_modules/handlebars/dist/cjs/handlebars.runtime.js', {expose: 'handlebars.runtime'});
+			// bundler.require('./node_modules/gulp-handlebars/node_modules/handlebars/dist/cjs/handlebars.runtime.js', {expose: 'handlebars.runtime'});
 
 			file.contents = bundler.bundle({fast: true, noParse: glob.sync('./libs/*.js')});
 		}))
 		.pipe(rename('libs.js'))
-		.pipe(gulp.dest('temp'));
+		.pipe(gulp.dest('temp'))
+		.pipe(livereload());
 });
 
 gulp.task('browserify:templates', ['templates'], function() {
@@ -38,17 +41,20 @@ gulp.task('browserify:templates', ['templates'], function() {
 			file.contents = bundler.bundle({fast: true});
 		}))
 		.pipe(rename('templates.js'))
-		.pipe(gulp.dest('temp'));
+		.pipe(gulp.dest('temp'))
+		.pipe(livereload());
 });
 
 gulp.task('browserify:application', ['helpers'], function() {
-	gulp.src('./application/application.js', {read: false})
+	gulp.src('./application/main.js', {read: false})
 		.pipe(plumber(gutil.log))
 		.pipe(tap(function(file) {
 			var bundler = browserify(file.path);
 
 			glob.sync('./application/**/*.js').forEach(function(file) {
-				bundler.require(file, {expose: file.split('./application/')[1].replace('.js', '')});
+				if(file !== './application/main.js') {
+					bundler.require(file, {expose: file.split('./application/')[1].replace('.js', '')});
+				}
 			});
 
 			glob.sync('./libs/*.js').forEach(function(file) {
@@ -62,5 +68,6 @@ gulp.task('browserify:application', ['helpers'], function() {
 			file.contents = bundler.bundle({fast: true, debug: true});
 		}))
 		.pipe(rename('application.js'))
-		.pipe(gulp.dest('temp'));
+		.pipe(gulp.dest('temp'))
+		.pipe(livereload());
 });

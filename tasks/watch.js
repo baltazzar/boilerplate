@@ -5,6 +5,6 @@ var gulp = require('gulp'),
 gulp.task('watch', function() {
 	watch({glob: ['libs/**/*.js'], read: false, gaze:{maxListeners: 999}}, ['browserify:libs']);
 	watch({glob: ['application/templates/**/*.tpl'], read: false, gaze:{maxListeners: 999}}, ['browserify:templates']);
-	watch({glob: ['application/**/*.js'], read: false, gaze:{maxListeners: 999}}, ['browserify:application']);
-	watch({glob: ['css/**/*.css', 'index.html', 'config.json', 'temp/*.js'], read: false, gaze:{maxListeners: 999}}).pipe(livereload());
+	watch({glob: ['application/**/*.js', '!application/handlebars_helpers.js'], read: false, gaze:{maxListeners: 999}}, ['browserify:application']);
+	watch({glob: ['css/**/*.css', 'index.html', 'config.json'], read: false, gaze:{maxListeners: 999}}).pipe(livereload());
 });

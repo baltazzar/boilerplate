@@ -88,7 +88,6 @@ var setStoreCleanInterval = function() {
 Boiler.init = function(config, application) {
 	Boiler.Config = config;
 	Boiler.Application = application;
-	Boiler.errorCalled = false;
 	Boiler.models = {};
 	Boiler.collections = {};
 

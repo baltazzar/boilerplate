@@ -5,7 +5,7 @@ var gulp = require('gulp'),
 	glob = require('glob');
 
 gulp.task('helpers', function() {
-	gulp.src('application/handlebars_helpers.js')
+	gulp.src('application/main.js')
 		.pipe(plumber({errorHandler: gutil.log}))
 		.pipe(wrap('<%= include_helpers(contents) %>', {}, {
 			imports: {
@@ -17,7 +17,7 @@ gulp.task('helpers', function() {
 
 					glob.sync('./application/helpers/**/*.js').forEach(function(file) {
 						file = file.split('./application/')[1].replace('.js', '');
-						helpers.push("exports = require('" + file + "');\n");
+						helpers.push("require('" + file + "');\n");
 					});
 
 					helpers.push('//end-register-helpers');
@@ -25,7 +25,7 @@ gulp.task('helpers', function() {
 					if(re.exec(contents)) {
 						return contents.replace(re, helpers.join(''));
 					} else {
-						return helpers.join('');
+						return helpers.join('') + '\n\n' + contents;
 					}
 				}
 			}

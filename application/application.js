@@ -6,9 +6,6 @@ var Backbone = require('backbone');
 // Injeta o jquery.
 Backbone.$ = $;
 
-// Registra os helpers do Handlebars
-require('handlebars_helpers');
-
 var Marionette = require('marionette'),
 	Templates = require('templates'),
 	Config = require('config'),

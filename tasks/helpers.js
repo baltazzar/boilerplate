@@ -5,8 +5,8 @@ var gulp = require('gulp'),
 	glob = require('glob');
 
 gulp.task('helpers', function() {
-	gulp.src('application/main.js')
-		.pipe(plumber({errorHandler: gutil.log}))
+	return gulp.src('application/main.js')
+		.pipe(plumber(gutil.log))
 		.pipe(wrap('<%= include_helpers(contents) %>', {}, {
 			imports: {
 				include_helpers: function(contents) {

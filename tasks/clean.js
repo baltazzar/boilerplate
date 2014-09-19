@@ -1,7 +1,7 @@
 var gulp = require('gulp'),
 	pkg = require('../package.json'),
-	clean = require('gulp-clean');
+	rimraf = require('gulp-rimraf');
 
 gulp.task('clean', function() {
-	return gulp.src('dist/' + pkg.version, {read: false}).pipe(clean());
+	return gulp.src('dist/' + pkg.version, {read: false}).pipe(rimraf());
 });

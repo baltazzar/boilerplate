@@ -26,7 +26,7 @@ gulp.task('application', ['helpers'], function() {
 				bundler.external(file.split('./libs/')[1].replace('.js', ''));
 			});
 
-			bundler.require('./config.json', {expose: 'config'});
+			bundler.require('./config.js', {expose: 'config'});
 			bundler.external('templates');
 			bundler.external('handlebars.runtime');
 

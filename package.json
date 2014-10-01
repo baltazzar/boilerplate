@@ -5,13 +5,13 @@
   "volo": {
     "baseDir": "libs",
     "dependencies": {
-      "../css/bootstrap": "github:components/bootstrap/3.2.0#css/bootstrap.css",
-      "../fonts": "github:components/bootstrap/3.2.0#fonts",
-      "jquery": "github:components/jquery/1.11.1",
-      "underscore": "github:jashkenas/underscore/1.6.0",
-      "backbone": "github:jashkenas/backbone/1.1.2",
-      "marionette": "github:marionettejs/backbone.marionette/v2.1.0#lib/backbone.marionette.js",
-      "bootstrap": "github:components/bootstrap/3.2.0#js/bootstrap.js",
+      "../css/bootstrap": "github:components/bootstrap/~3#css/bootstrap.css",
+      "../fonts": "github:components/bootstrap/~3#fonts",
+      "jquery": "github:components/jquery/~1",
+      "underscore": "github:jashkenas/underscore/~1",
+      "backbone": "github:jashkenas/backbone/~1",
+      "marionette": "github:marionettejs/backbone.marionette/~v2#lib/backbone.marionette.js",
+      "bootstrap": "github:components/bootstrap/~3#js/bootstrap.js",
       "backbone.queryparams": "github:jhudson8/backbone-query-parameters/master#backbone.queryparams.js"
     }
   },

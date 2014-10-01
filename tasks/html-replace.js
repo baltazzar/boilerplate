@@ -1,11 +1,10 @@
 var gulp = require('gulp'),
-	pkg = require('../package.json'),
-	processhtml = require('gulp-processhtml'),
-	replace = require('gulp-replace');
+	plugins = require('gulp-load-plugins')(),
+	pkg = require('../package.json');
 
 gulp.task('html-replace', function() {
 	return gulp.src('index.html')
-			.pipe(replace('@@versao', pkg.version))
-			.pipe(processhtml('index.html'))
+			.pipe(plugins.replace('@@versao', pkg.version))
+			.pipe(plugins.processhtml('index.html'))
 			.pipe(gulp.dest('dist/' + pkg.version));
 });

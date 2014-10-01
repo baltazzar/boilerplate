@@ -1,11 +1,11 @@
 var gulp = require('gulp'),
-	runSequence = require('run-sequence'),
-	gutil = require('gulp-util');
+	plugins = require('gulp-load-plugins')(),
+	runSequence = require('run-sequence');
 
 gulp.task('build', function() {
 	runSequence('clean', ['minify-css', 'minify-js', 'copy', 'html-replace'], function() {
-		gutil.log(gutil.colors.green('########################################################################################'));
-		gutil.log(gutil.colors.green('#                            BUILD REALIZADO COM SUCESSO!!!                            #'));
-		gutil.log(gutil.colors.green('########################################################################################'));
+		plugins.util.log(plugins.util.colors.green('########################################################################################'));
+		plugins.util.log(plugins.util.colors.green('#                            BUILD REALIZADO COM SUCESSO!!!                            #'));
+		plugins.util.log(plugins.util.colors.green('########################################################################################'));
 	});
 });

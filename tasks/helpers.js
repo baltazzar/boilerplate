@@ -1,13 +1,11 @@
 var gulp = require('gulp'),
-	gutil = require('gulp-util'),
-	plumber = require('gulp-plumber'),
-	wrap = require('gulp-wrap'),
+	plugins = require('gulp-load-plugins')(),
 	glob = require('glob');
 
 gulp.task('helpers', function() {
 	return gulp.src('application/main.js')
-		.pipe(plumber(gutil.log))
-		.pipe(wrap('<%= include_helpers(contents) %>', {}, {
+		.pipe(plugins.plumber(plugins.util.log))
+		.pipe(plugins.wrap('<%= include_helpers(contents) %>', {}, {
 			imports: {
 				include_helpers: function(contents) {
 					var helpers = [],

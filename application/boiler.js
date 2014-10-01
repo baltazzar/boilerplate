@@ -2,7 +2,8 @@ var _ = require('underscore'),
 	Backbone = require('backbone'),
 	Marionette = require('marionette'),
 	Templates = require('templates'),
-	Boiler = {};
+	Config = require('config'),
+	Boiler = {LAST_ROUTE: '#/'};
 
 // Register Routes
 var registerRoutes = function(config) {
@@ -19,6 +20,14 @@ var registerRoutes = function(config) {
 			return controller.execute(controllerName, methodName, arguments);
 		});
 	});
+
+	if(Config.BLACKLIST_ROUTES) {
+		Router.on('route', function() {
+			if(!_.contains(Config.BLACKLIST_ROUTES, window.location.hash)) {
+				Boiler.LAST_ROUTE = window.location.hash;
+			}
+		});
+	}
 
 	Backbone.history.start();
 };

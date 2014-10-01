@@ -1,15 +1,12 @@
 var gulp = require('gulp'),
-	gutil = require('gulp-util'),
-	plumber = require('gulp-plumber'),
-	tap = require('gulp-tap'),
-	rename = require('gulp-rename'),
+	plugins = require('gulp-load-plugins')(),
 	glob = require('glob'),
 	browserify = require('browserify');
 
 gulp.task('libs', function() {
 	return gulp.src('./application/application.js', {read: false})
-		.pipe(plumber(gutil.log))
-		.pipe(tap(function(file) {
+		.pipe(plugins.plumber(plugins.util.log))
+		.pipe(plugins.tap(function(file) {
 			var bundler = browserify({
 				fast: true,
 				noparse: glob.sync('./libs/*.js')
@@ -23,6 +20,6 @@ gulp.task('libs', function() {
 
 			file.contents = bundler.bundle();
 		}))
-		.pipe(rename('libs.js'))
+		.pipe(plugins.rename('libs.js'))
 		.pipe(gulp.dest('temp'));
 });

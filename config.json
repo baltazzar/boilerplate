@@ -9,6 +9,8 @@
 		"main" : "#main"
 	},
 
-	"CACHE_CLEAR_INTERVAL": 5000,
-	"CDN_URL": "http://servicos.sorocaba.sp.gov.br/cdn"
+	"BLACKLIST_ROUTES": ["#/login", "#/logout"],
+	"CACHE_CLEAR_INTERVAL": 1,
+	"CDN_URL": "http://servicos.sorocaba.sp.gov.br/cdn",
+	"ENV": "TESTE"
 }

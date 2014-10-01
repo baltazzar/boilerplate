@@ -7,6 +7,7 @@ gulp.task('server', function() {
 			baseDir: './'
 		},
 		files: ['temp/*.js', 'css/**/*.css', 'index.html'],
-		notify: false
+		notify: false,
+		ghostMode: false
 	});
 });

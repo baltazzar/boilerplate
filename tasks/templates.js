@@ -1,20 +1,13 @@
 var gulp = require('gulp'),
-	gutil = require('gulp-util'),
-	plumber = require('gulp-plumber'),
-	handlebars = require('gulp-handlebars'),
-	defineModule = require('gulp-define-module'),
-	concat = require('gulp-concat'),
-	wrap = require('gulp-wrap'),
+	plugins = require('gulp-load-plugins')(),
 	path = require('path'),
-	tap = require('gulp-tap'),
-	browserify = require('browserify'),
-	rename = require('gulp-rename');
+	browserify = require('browserify');
 
 gulp.task('templates', function() {
 	return gulp.src('application/templates/**/*.tpl')
-		.pipe(plumber(gutil.log))
-		.pipe(handlebars({ handlebars: require('handlebars') }))
-		.pipe(defineModule('plain', {
+		.pipe(plugins.plumber(plugins.util.log))
+		.pipe(plugins.handlebars({ handlebars: require('handlebars') }))
+		.pipe(plugins.defineModule('plain', {
 			wrapper: '<%= content %>',
 			context: function(context) {
 				var filepath = context.file.path.split('templates' + path.sep)[1].replace('.js', '.tpl'),
@@ -27,9 +20,9 @@ gulp.task('templates', function() {
 				return {content: content};
 			}
 		}))
-		.pipe(concat('templates.js'))
-		.pipe(wrap('var Handlebars = require("handlebars.runtime")["default"];\nvar templates = {};\n<%= contents %>\nmodule.exports = templates;'))
-		.pipe(tap(function(file) {
+		.pipe(plugins.concat('templates.js'))
+		.pipe(plugins.wrap('var Handlebars = require("handlebars.runtime")["default"];\nvar templates = {};\n<%= contents %>\nmodule.exports = templates;'))
+		.pipe(plugins.tap(function(file) {
 			var bundler = browserify({fast: true});
 
 			bundler.require(file, {expose: 'templates'});
@@ -37,6 +30,6 @@ gulp.task('templates', function() {
 
 			file.contents = bundler.bundle();
 		}))
-		.pipe(rename('templates.js'))
+		.pipe(plugins.rename('templates.js'))
 		.pipe(gulp.dest('temp'));
 });

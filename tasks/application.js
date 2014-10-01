@@ -1,15 +1,12 @@
 var gulp = require('gulp'),
-	gutil = require('gulp-util'),
-	plumber = require('gulp-plumber'),
-	tap = require('gulp-tap'),
-	rename = require('gulp-rename'),
+	plugins = require('gulp-load-plugins')(),
 	glob = require('glob'),
 	browserify = require('browserify');
 
 gulp.task('application', ['helpers'], function() {
 	return gulp.src('./application/main.js', {read: false})
-		.pipe(plumber(gutil.log))
-		.pipe(tap(function(file) {
+		.pipe(plugins.plumber(plugins.util.log))
+		.pipe(plugins.tap(function(file) {
 			var bundler = browserify({
 				entries: './application/main.js',
 				fast: true,
@@ -32,6 +29,6 @@ gulp.task('application', ['helpers'], function() {
 
 			file.contents = bundler.bundle();
 		}))
-		.pipe(rename('application.js'))
+		.pipe(plugins.rename('application.js'))
 		.pipe(gulp.dest('temp'));
 });

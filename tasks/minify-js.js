@@ -1,11 +1,10 @@
 var gulp = require('gulp'),
-	pkg = require('../package.json'),
-	concat = require('gulp-concat');
-	uglify = require('gulp-uglify');
+	plugins = require('gulp-load-plugins')(),
+	pkg = require('../package.json');
 
 gulp.task('minify-js', function() {
 	return gulp.src(['temp/libs.js', 'temp/templates.js', 'temp/application.js'])
-		.pipe(concat('application.min.js'))
-		.pipe(uglify())
+		.pipe(plugins.concat('application.min.js'))
+		.pipe(plugins.uglify())
 		.pipe(gulp.dest('dist/' + pkg.version + '/js'));
 });

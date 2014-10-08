@@ -1,5 +1,4 @@
-var gulp = require('gulp'),
-	plugins = require('gulp-load-plugins')();
+var gulp = require('gulp');
 
 gulp.task('watch', function() {
 	gulp.watch(['libs/*.js'], ['libs']);

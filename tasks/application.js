@@ -7,7 +7,7 @@ var gulp = require('gulp'),
 		compiler: 'require("handlebars.runtime")["default"]'
 	});
 
-gulp.task('application', ['helpers', 'partials'], function() {
+gulp.task('application', function() {
 	return gulp.src('./application/main.js', {read: false})
 		.pipe(plugins.plumber(plugins.util.log))
 		.pipe(plugins.tap(function(file) {

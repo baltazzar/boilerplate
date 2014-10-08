@@ -7,7 +7,6 @@ var Backbone = require('backbone');
 Backbone.$ = $;
 
 var Marionette = require('marionette'),
-	Templates = require('templates'),
 	Config = require('config'),
 	Application = new Marionette.Application();
 
@@ -16,7 +15,7 @@ Marionette.Renderer.render = function(template, data, view) {
 		return template;
 	} else {
 		data.view = view;
-		return Templates[template](data);
+		return require(template)(data);
 	}
 };
 

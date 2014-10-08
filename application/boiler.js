@@ -1,7 +1,6 @@
 var _ = require('underscore'),
 	Backbone = require('backbone'),
 	Marionette = require('marionette'),
-	Templates = require('templates'),
 	Config = require('config'),
 	Boiler = {LAST_ROUTE: '#/'};
 
@@ -34,7 +33,7 @@ var registerRoutes = function(config) {
 
 // Set the Loading and Error Templates
 var setLoadingAndErrorTemplates = function() {
-	if(Templates['loading.tpl']) {
+	if(require('loading.tpl')) {
 		var loading;
 		$(document).ajaxStart(function() {
 			loading = setTimeout(function() {
@@ -47,7 +46,7 @@ var setLoadingAndErrorTemplates = function() {
 		});
 	}
 
-	if(Templates['error.tpl']) {
+	if(require('error.tpl')) {
 		$(document).ajaxError(function(event, err) {
 			var model = new Backbone.Model(err);
 			Boiler.Application.main.show(new Marionette.ItemView({template: 'error.tpl', model: model}));

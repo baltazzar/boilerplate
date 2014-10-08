@@ -1,7 +1,11 @@
 var	Application = require('application'),
 	Boiler = require('boiler'),
 	Initializer = require('initializer'),
+	Handlebars = require('handlebars.runtime')['default'],
 	Config = require('config');
+
+//start-register-partials
+//end-register-partials
 
 //start-register-helpers
 require('helpers/config');

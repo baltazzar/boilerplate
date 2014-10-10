@@ -1,17 +1,13 @@
 var	Application = require('application'),
 	Boiler = require('boiler'),
 	Initializer = require('initializer'),
-	Handlebars = require('handlebars.runtime')['default'],
 	Config = require('config');
 
-//start-register-partials
-//end-register-partials
+// Registra os helpers
+require('helpers');
 
-//start-register-helpers
-require('helpers/config');
-require('helpers/link');
-require('helpers/log');
-//end-register-helpers
+// Registra os partials
+require('partials');
 
 // Inicia o Boiler
 Boiler.init(Config, Application);

@@ -3,15 +3,12 @@ var gulp = require('gulp'),
 	glob = require('glob');
 
 gulp.task('partials', function() {
-	return gulp.src('application/main.js')
+	return gulp.src('application/partials.js')
 		.pipe(plugins.plumber(plugins.util.log))
 		.pipe(plugins.wrap('<%= include_partials(contents) %>', {}, {
 			imports: {
 				include_partials: function(contents) {
-					var partials = [],
-						re = new RegExp('//start-register-partials((?:.|\\s)*?)//end-register-partials'); // thanks Tony
-
-					partials.push('//start-register-partials\n');
+					var partials = ["var Handlebars = require('handlebars.runtime')['default'];\n\n"];
 
 					glob.sync('./application/templates/**/*.tpl').forEach(function(file) {
 						if(file.indexOf('/_') !== -1) {
@@ -20,13 +17,7 @@ gulp.task('partials', function() {
 						}
 					});
 
-					partials.push('//end-register-partials');
-
-					if(re.exec(contents)) {
-						return contents.replace(re, partials.join(''));
-					} else {
-						return partials.join('') + '\n\n' + contents;
-					}
+					return partials.join('');
 				}
 			}
 		}))

@@ -1,3 +1,7 @@
+#DEPRECATED!!!
+
+## Use o novo [Boiler](http://www.github.com/baltazzar/boiler)
+
 # Boilerplate 2
 > Ponto de partida front-end para desenvolvimento de aplicações web.
 
